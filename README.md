@@ -1,6 +1,6 @@
 # Ecommerce Product Manager 
 
-![Colorful Gradient 3D Artist Twitter Header](https://user-images.githubusercontent.com/117543842/229423551-520091f1-ecfc-4747-9b8d-ff7c645176b4.png)
+![Banner](https://user-images.githubusercontent.com/117543842/229423894-364befe8-b822-4f7a-bb1b-90c70e1e3732.png)
 The repository contains a file called **main.js**, which contains two classes, the **Product** class and the **ProductManager** class.
 
 ## Product class
