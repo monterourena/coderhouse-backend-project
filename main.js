@@ -31,4 +31,23 @@ async function TestBench(){
 }
 
 
-TestBench();
+async function TestBench2(){
+  const myProductManager = new ProductManager("products.json")
+  await myProductManager.getProductById(10);
+  // "Not found"
+
+  await myProductManager.getProductById(0);
+  // "Successful operation" {title: "myTitle", ... , id: 0}
+
+  await myProductManager.updateProduct(12);
+  // "Not found"
+
+  await myProductManager.updateProduct(1,{id:28, price:2000, stock:930, category:"myCategory"});
+  // "Successful operation" {title: "myTitle2", price:2000, stock:930, category:"myCategory", ... , id: 1}
+
+  await myProductManager.deleteProduct(0);
+  // "Successful operation"
+}
+
+await TestBench();
+await TestBench2();
