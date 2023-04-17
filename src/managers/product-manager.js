@@ -29,6 +29,8 @@ class ProductManager {
     this.path = `./src/data/${filenameWithExtension}`;
   }
 
+  // Privated methods
+
   async #readProductsFromFile() {
     if (!fs.existsSync(this.path)) {
       return [];
@@ -51,47 +53,13 @@ class ProductManager {
   }
 
   async #addValidatedProduct(products, productWithoutID) {
-    const SUCCESS_MESSAGE = "Product added";
     const productWithID = await this.#setID(products, productWithoutID);
     products.push(productWithID);
     await this.#writeProductsToFile(products);
-
-    console.log(SUCCESS_MESSAGE, productWithID); // Console.log
-  }
-
-  async addProduct(title, description, price, thumbnail, code, stock) {
-    const ERROR_MESSAGE =
-      "Invalid product: missing parameters or repeated product code";
-
-    let products = await this.#readProductsFromFile();
-
-    const newProduct = new Product(
-      title,
-      description,
-      price,
-      thumbnail,
-      code,
-      stock
-    );
-    const isInvalid =
-      newProduct.isNull() ||
-      products.some((product) => product.code == newProduct.code);
-
-    if (!isInvalid) {
-      this.#addValidatedProduct(products, newProduct);
-    } else {
-      console.error(ERROR_MESSAGE);
-    } // Console.log
-  }
-
-  async getProducts() {
-    const products = await this.#readProductsFromFile();
-    return products;
   }
 
   async #manageProductById(type, id, newProperties) {
     const ERROR_MESSAGE = "Not found";
-    const SUCCESS_MESSAGE = "Successful operation";
 
     const products = await this.#readProductsFromFile();
 
@@ -99,18 +67,15 @@ class ProductManager {
       const productById = await products.find((product) => product.id == id);
 
       if (productById === undefined) {
-        console.error(ERROR_MESSAGE);
         return 404;
       }
 
-      console.log(SUCCESS_MESSAGE, productById);
       return productById;
     }
 
     const indexById = await products.findIndex((product) => product.id == id);
 
     if (indexById === -1) {
-      console.error(ERROR_MESSAGE);
       return 404;
     }
 
@@ -127,17 +92,43 @@ class ProductManager {
         id: originalProductId,
       };
 
-      console.log(SUCCESS_MESSAGE, products[indexById]);
-
       await this.#writeProductsToFile(products);
       return originalProduct;
     }
     if (type === "delete") {
       products.splice(indexById, 1);
-      console.log(SUCCESS_MESSAGE);
-
       await this.#writeProductsToFile(products);
     }
+  }
+
+  // Public methods
+
+  async addProduct(title, description, price, thumbnail, code, stock) {
+    let products = await this.#readProductsFromFile();
+
+    const newProduct = new Product(
+      title,
+      description,
+      price,
+      thumbnail,
+      code,
+      stock
+    );
+    const isInvalid =
+      newProduct.isNull() ||
+      products.some((product) => product.code == newProduct.code);
+
+    if (!isInvalid) {
+      await this.#addValidatedProduct(products, newProduct);
+      return 200;
+    } else {
+      return 400;
+    }
+  }
+
+  async getProducts() {
+    const products = await this.#readProductsFromFile();
+    return products;
   }
 
   async getProductById(id) {

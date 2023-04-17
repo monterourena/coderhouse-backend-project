@@ -1,1 +1,32 @@
-[{"title":"myTitle2","description":"myDescription2","price":2000,"thumbnail":"path2","code":"def456","stock":930,"id":1,"category":"myCategory"},{"title":"myTitle","description":"myDescription","price":200,"thumbnail":"path","code":"abc123","stock":25,"id":2}]
+[
+  {
+    "title": "iPhone 14 Pro Max",
+    "description": "256Gb storage",
+    "price": 1500,
+    "thumbnail": "path2",
+    "code": "def456",
+    "stock": 930,
+    "id": 1,
+    "category": "iPhone"
+  },
+  {
+    "title": "Macbook Pro",
+    "description": "M2 Max processor",
+    "price": 3800,
+    "thumbnail": "path",
+    "code": "abc123",
+    "stock": 25,
+    "id": 2,
+    "category": "Mac"
+  },
+  {
+    "title": "iPad Air",
+    "description": "4th generation iPad",
+    "price": 999,
+    "thumbnail": "path",
+    "code": "abc123",
+    "stock": 25,
+    "id": 3,
+    "category": "iPad"
+  }
+]

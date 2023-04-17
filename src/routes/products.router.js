@@ -7,8 +7,11 @@ const productManager = new ProductManager("products.json");
 const router = Router();
 
 router.get("/", async (req, res) => {
-  const result = await productManager.getProducts();
-  res.send(result);
+
+  const products = await productManager.getProducts();
+  const limit = parseInt(req.query.limit) || products.length
+
+  res.send(products.slice(0,limit));
 });
 
 router.get("/:id", async (req, res) => {
