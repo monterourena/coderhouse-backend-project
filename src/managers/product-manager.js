@@ -100,7 +100,7 @@ class ProductManager {
 
       if (productById === undefined) {
         console.error(ERROR_MESSAGE);
-        return null;
+        return 404;
       }
 
       console.log(SUCCESS_MESSAGE, productById);
@@ -111,7 +111,7 @@ class ProductManager {
 
     if (indexById === -1) {
       console.error(ERROR_MESSAGE);
-      return null;
+      return 404;
     }
 
     if (type === "update") {
@@ -142,7 +142,7 @@ class ProductManager {
 
   async getProductById(id) {
     const type = "get";
-    await this.#manageProductById(type, id);
+    return await this.#manageProductById(type, id);
   }
 
   async updateProduct(id, object) {
