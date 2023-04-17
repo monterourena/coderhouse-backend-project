@@ -1,7 +1,3 @@
-// ! Debe tener un método deleteProduct, el cual debe recibir un id y debe eliminar el producto que tenga ese id en el archivo.
-// ! Debe tener un método updateProduct, el cual debe recibir el id del producto a actualizar, así también como el campo a actualizar (puede ser el objeto completo, como en una DB), y debe actualizar el producto que tenga ese id en el archivo. NO DEBE BORRARSE SU ID
-// Usar persistencia en archivos
-
 // Libraries
 import fs from "fs";
 
@@ -30,7 +26,7 @@ class Product {
 
 class ProductManager {
   constructor(filenameWithExtension) {
-    this.path = `./src/Products/${filenameWithExtension}`;
+    this.path = `./src/data/${filenameWithExtension}`;
   }
 
   async #readProductsFromFile() {
