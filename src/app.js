@@ -2,7 +2,7 @@
 import express from "express";
 
 // ROUTERS
-import productsRouter from "./routes/products.router.js";
+import productsRouter from "./routes/products.js";
 
 // CONFIGURATION
 const app = express();
