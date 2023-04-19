@@ -14,10 +14,14 @@ router.get("/", async (req, res) => {
   res.send(products.slice(0,limit));
 });
 
-router.get("/:id", async (req, res) => {
-  const id = req.params.id;
+router.get("/:pid", async (req, res) => {
+  const id = req.params.pid;
   const result = await productManager.getProductById(id);
   res.send(result);
 });
+
+
+
+
 
 export default router;
