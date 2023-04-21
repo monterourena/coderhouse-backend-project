@@ -36,6 +36,10 @@ class ProductManager {
 
   async #readProductsFromFile() {
     try {
+      if(!fs.existsSync(this.path)){
+        this.#writeProductsToFile([])
+      }
+
       const data = await fs.promises.readFile(this.path, "utf-8");
       const products = JSON.parse(data);
       return products;
@@ -97,15 +101,16 @@ class ProductManager {
         };
 
         await this.#writeProductsToFile(products);
-        return originalProduct;
+        return products[indexById];
       }
       if (type === "delete") {
-        products.splice(indexById, 1);
-        await this.#writeProductsToFile(products);
+      
+          products.splice(indexById, 1);
+          await this.#writeProductsToFile(products);
+          return products
       }
     } catch (error) {
-      console.error(error);
-      throw new Error("Error managing product by id");
+      return undefined;
     }
   }
 
@@ -135,14 +140,14 @@ class ProductManager {
     return await this.#manageProductById(type, id);
   }
 
-  async updateProduct(id, object) {
+  async updateProductById(id, object) {
     const type = "update";
-    await this.#manageProductById(type, id, object);
+    return await this.#manageProductById(type, id, object);
   }
 
-  async deleteProduct(id) {
+  async deleteProductById(id) {
     const type = "delete";
-    await this.#manageProductById(type, id);
+    return await this.#manageProductById(type, id);
   }
 }
 
