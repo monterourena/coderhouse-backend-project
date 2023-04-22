@@ -12,12 +12,18 @@ Clone this repository using git clone.
 
 ```js
 ├── src
-│   ├── data
+│   ├── controllers
+│   │   └── carts.json
 │   │   └── products.json
-│   ├── managers
-│   │   └── product-manager.js
+│   ├── data
+│   │   └── carts.json
+│   │   └── products.json
+│   ├── models
+│   │   └── carts.json
+│   │   └── products.json
 │   ├── routes
-│   │   └── products.router.js
+│   │   └── carts.json
+│   │   └── products.json
 │   ├── test
 │   │   └── test-bench.js
 │   └── utils
@@ -25,13 +31,14 @@ Clone this repository using git clone.
 ├── .gitignore
 └── package.json
 ```
-
-- **src/data/products.json**: JSON file where the products are stored.
-
-- **src/managers/product-manager.js**: Class that handles the management of the products.
-
-- **src/routes/products.router.js**: Router file that defines the endpoints for the products.
-
+- **src/controllers/carts.json**: Carts Model Controller.
+- **src/controllers/products.json**: Products Model Controller.
+- **src/data/carts.json**: JSON file where carts are stored.
+- **src/data/products.json**: JSON file where products are stored.
+- **src/models/carts.js**: Model that handles the management of the carts.
+- **src/models/products.js**: Model that handles the management of the products.
+- **src/routes/carts.js**: Router file that defines the endpoints for the carts.
+- **src/routes/products.js**: Router file that defines the endpoints for the products.
 - **src/app.js**: Main file that sets up the server and defines the middleware.
 
 ### Installation
@@ -47,20 +54,47 @@ npm run dev
 The server will be listening on port 8080.
 
 # Endpoints
+| **Request type** | **Path** | **Body** | **Query params** | **Path variables** | **Output** |
+|---|---|---|---|---|---|
+| GET | /api/products/ |  | limit | | Array |
+| GET | /api/products/:pid |  |  | pid : Product ID | Object |
+| POST | /api/products/ | Object |  |  | Object |
+| PUT | /api/products/:pid | Object |  | pid : Product ID | Object |
+| DELETE | /api/products/:pid |  |  | pid : Product ID | Object |
+| POST | /api/carts/ |  |  |  | Object |
+| GET | /api/carts/:cid |  |  | cid : Cart ID | Array |
+| POST | /api/carts/:cid/product/:pid | Object |  | cid : Cart ID, pid : Product ID | Object |
 
-## Get all products
-```vbnet 
-GET /products
-```
-Returns an array with all the products stored in products.json. An optional query parameter limit can be used to limit the number of results returned.
+## GET /api/products/
+Returns an array of objects associated with the existing products.
+#### Query params
+- **limit**: Maximum number of returned products
 
-#### Query Parameters:
-```vbnet 
-limit (integer)
+
+## GET /api/products/:pid
+Returns an object with the information associated to a product with a specific ID.
+#### Path variables
+- **pid**: Product ID
+
+## POST /api/products/
+Allows to add a product to the Products model. It receives an object through the body and returns an object with the values entered along with the assigned product ID.
+#### Body
+```js
+title:        String  | Required
+description:  String  | Required | Unique
+code:         String  | Required
+price:        Integer | Required
+status:       String  | Required
+stock:        Integer | Required
+category:     String  | Required
+thumbnails:   Array   | Optional
 ```
-- **Limit**: Maximum quantity of returned products. If no value is defined for the limit or if it is less than one, all existing products are returned.
-## Get product by ID
-```vbnet 
-- GET /products/:id
-```
-Returns the product with the specified id.
+
+## PUT /api/products/:pid
+Modifies a product from a given Product ID. Receives through the body an object with attributes. If the attributes exist it replaces them,  if they do not exist they are added. The Product ID is the only one that **is not modified** regardless of whether it is sent in the attributes object.
+
+
+## DELETE /api/products/:pid
+Eliminates a product from the specified id
+
+
