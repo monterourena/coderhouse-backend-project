@@ -1,15 +1,9 @@
-// LIBRARIES
-import express from "express";
+// CONFIGURATION
+import { app, PORT } from "./config.js";
 
 // ROUTERS
 import productsRouter from "./routes/products.js";
 import cartsRouter from "./routes/carts.js";
-
-// CONFIGURATION
-const app = express();
-const PORT = 8080;
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 // ROUTES
 app.use("/api/products", productsRouter);
