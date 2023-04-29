@@ -5,6 +5,6 @@ const router = Router();
 
 router.get("/home", viewsController.displayProducts);
 
-router.get("/realTimeProducts", viewsController.realTimeProducts);
+router.get("/realtimeproducts", viewsController.realTimeProducts);
 
 export default router;

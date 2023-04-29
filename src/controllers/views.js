@@ -10,8 +10,11 @@ controller.displayProducts = async (req, res)=>{
     })
 }
 
-controller.realTimeProducts = (req, res) =>{
-    res.render("realTimeProducts")
+controller.realTimeProducts = async(req, res) =>{
+    const products = await productsModel.getProducts()
+    res.render("realtimeproducts",{
+        products: products
+    })
 }
 
 
