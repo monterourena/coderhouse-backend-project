@@ -1,4 +1,4 @@
-import ProductsModel from "../models/products.js"
+import ProductsModel from "../../models/fileSystem/products.js"
 
 const controller = [];
 const productsModel = new ProductsModel("../data/products.json")

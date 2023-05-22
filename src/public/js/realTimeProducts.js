@@ -14,19 +14,3 @@ socket.on("productsUpdate", (products)=>{
     });
     productsElement.innerHTML= productsRender;
 })
-
-
-
-// "title": "Apple Watch",
-//     "description": "Series 5",
-//     "code": "apple001",
-//     "price": 1000,
-//     "status": true,
-//     "stock": 270,
-//     "category": "Smart Watch",
-//     "thumbnails": [
-//         "aws_bucket.com/image.png",
-//         "aws_bucket.com/image2.png",
-//         "aws_bucket.com/image3.png"
-//     ],
-//     "id": 0

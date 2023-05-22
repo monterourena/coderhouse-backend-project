@@ -1,5 +1,5 @@
-import CartsModel from "../models/carts.js";
-import ProductsModel from "../models/products.js";
+import CartsModel from "../../models/fileSystem/carts.js";
+import ProductsModel from "../../models/fileSystem/products.js";
 
 const controller = {};
 const cartsModel = new CartsModel("carts.json");
