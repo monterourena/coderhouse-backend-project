@@ -1,9 +1,18 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
-const collection = "messages";
+const collection = "carts";
 const schema = new mongoose.Schema(
   {
-    products: [],
+    products: {
+      type:[{
+        quantity: Number,
+        product: {
+          type: mongoose.SchemaTypes.ObjectId,
+          ref: "products"
+        }
+      }],
+      default:[]
+    }, 
   },
   { timestamps: { createdAt: "created_at", updatedAt: "updated_at" } }
 );
