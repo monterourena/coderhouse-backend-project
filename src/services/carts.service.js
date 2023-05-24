@@ -11,14 +11,7 @@ class CartsService {
     const { cid, pid, quantity } = params;
     return cartModel.updateOne(
       { _id: cid },
-      {
-        $push: {
-          products: {
-            product: new mongoose.Types.ObjectId(pid),
-            quantity: quantity,
-          },
-        },
-      }
+      {$push: {products: {product: new mongoose.Types.ObjectId(pid),quantity: quantity}}}
     );
   };
 }

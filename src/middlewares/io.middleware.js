@@ -1,8 +1,8 @@
 import { io } from "../config/io.config.js";
 
-const middleware = (req, res, next)=>{
+const ioMiddleware = (req, res, next)=>{
     req.io = io;
     next();
 }
 
-export default middleware;
+export {ioMiddleware};
