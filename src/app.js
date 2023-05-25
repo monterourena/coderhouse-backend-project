@@ -13,7 +13,9 @@ import {viewsRouter} from "./routes/views.routes.js"
 
 // MIDDLEWARES
 import {ioMiddleware} from "./middlewares/io.middleware.js";
+import { responseMiddleware } from "./middlewares/response.middleware.js";
 app.use(ioMiddleware)
+app.use(responseMiddleware)
 
 // ROUTES
 
