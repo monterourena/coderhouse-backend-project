@@ -1,3 +1,4 @@
+import { productSchema } from "../../models/product.model.js";
 const validator = [];
 
 validator.getProducts = (queries) => {
@@ -16,17 +17,23 @@ validator.getProducts = (queries) => {
 
   //Sort validation
   const validSortRegex = /^(asc|desc|null)$/i;
-  isValid = validSortRegex.test(sort);
-  if (!isValid) return { isValid, validQueries: {} };
+  isValid = isValid && validSortRegex.test(sort);
+
 
   // Limit and page numeric validation
   const numericRegex = /^[0-9]+$/;
-  isValid = numericRegex.test(limit) && numericRegex.test(page);
-  if (!isValid) return { isValid, validQueries: {} };
+  isValid = isValid && numericRegex.test(limit) && numericRegex.test(page);
+  
+
+  // Query validation
+  const productSchemaKeys = Object.keys(productSchema.paths);
+  const queryKeys = Object.keys(query);
+  isValid = isValid && queryKeys.every(key => productSchemaKeys.includes(key))
+ 
 
   return {
     isValid,
-    validQueries: { limit, page, query, sort },
+    mappedQueries: { limit, page, query, sort },
   };
 };
 

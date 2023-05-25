@@ -1,31 +1,24 @@
+import { emitUpdatedProducts } from "../handlers/products.handler.js";
 import { ProductsService } from "../services/products.service.js";
-import { validator } from "./validators/products.validator.js"
+import { validator } from "./validators/products.validator.js";
 
 const controller = [];
 const productsService = new ProductsService();
 
-const emitUpdatedProducts = async (io) => {
-  const allProducts = await productsService.getProducts();
-  io.emit("products:update", allProducts);
-};
-
 controller.getProducts = async (req, res) => {
   const queries = req.query;
-  const { isValid, validQueries } = validator.getProducts(queries);
+  const { isValid, mappedQueries } = validator.getProducts(queries);
 
-  // if( !isValid ) return res.sendResponse.badRequest()
-  
+  if (!isValid) return res.sendResponse.badRequest();
+
   const products = await productsService.getProducts();
   res.sendResponse.ok({ data: products });
-
-
 };
 controller.addProduct = async (req, res) => {
   const product = req.body;
   const result = await productsService.addProduct(product);
 
   emitUpdatedProducts(req.io);
-
   res.sendResponse.created({ data: result });
 };
 controller.getProductById = async (req, res) => {
@@ -39,7 +32,6 @@ controller.updateProductById = async (req, res) => {
   const updatedProduct = await productsService.updateProductById(pid, params);
 
   emitUpdatedProducts(req.io);
-
   res.sendResponse.ok({ data: updatedProduct });
 };
 controller.deleteProductById = async (req, res) => {
@@ -47,7 +39,6 @@ controller.deleteProductById = async (req, res) => {
   const deletedProduct = await productsService.deleteProductById(pid);
 
   emitUpdatedProducts(req.io);
-
   res.sendResponse.ok({ data: deletedProduct });
 };
 
