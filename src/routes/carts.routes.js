@@ -6,7 +6,7 @@ const router = Router()
 
 router.post("/", cartsController.createCart)
 router.get("/:cid", cartsController.getCartProducts)
-router.post("/:cid/product/:pid", cartsController.addProductToCart)
+router.post("/:cid/products/:pid", cartsController.addProductToCart)
 
 
 

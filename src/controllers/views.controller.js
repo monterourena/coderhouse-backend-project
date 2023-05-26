@@ -12,10 +12,11 @@ controller.displayProducts = async (req, res) => {
   if (!isValid) return res.sendResponse.badRequest();
 
   // Query to service
+  mappedQueries.limit = 2;
   const products = await productsService.getPaginatedProducts(mappedQueries);
   const { docs, ...paginationParams } = products;
 
-  res.render("home", { products: docs, paginationParams });
+  res.render("products", { products: docs, paginationParams });
 };
 controller.realTimeProducts = async (req, res) => {
   const products = await productsService.getProducts();

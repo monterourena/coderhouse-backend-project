@@ -1,0 +1,30 @@
+<div><h1>Home View</h1></div>
+<div>
+    {{#each products}}
+        <div style="margin: 16px; padding:8px; background-color:#f2e6e8">
+        <h3>{{this.title}}</h3>
+        <h4>{{this.description}}</h4>
+        <p> ID: {{this._id}} Code: {{this.code}}</p>
+        <p> Price: {{this.price}}</p>
+        <p> Status: {{this.status}}</p>
+        <p> Category: {{this.category}}</p>
+        </div>
+    {{/each}}
+</div>
+
+<div>
+    {{#if paginationParams.hasPrevPage}}
+        <a href="/products?page={{paginationParams.prevPage}}"><button>Prev</button></a>
+    {{else}}
+         <button disabled="true">Prev</button>
+    {{/if}}
+    <div>{{ paginationParams.page }}</div>
+    {{#if paginationParams.hasNextPage}}
+        <a href="/products?page={{paginationParams.nextPage}}"><button>Next</button></a>
+    {{else}}
+         <button disabled="true">Prev</button>
+    {{/if}}
+    
+
+</div>
+
