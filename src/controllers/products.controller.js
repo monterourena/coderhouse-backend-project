@@ -7,12 +7,16 @@ const productsService = new ProductsService();
 
 controller.getProducts = async (req, res) => {
   const queries = req.query;
-  const { isValid, mappedQueries } = validator.getProducts(queries);
 
+  // Validation Stage
+  const { isValid, mappedQueries } = validator.getProducts(queries);
   if (!isValid) return res.sendResponse.badRequest();
 
-  const products = await productsService.getProducts();
-  res.sendResponse.ok({ data: products });
+  // Query to service
+  const products = await productsService.getPaginatedProducts(mappedQueries);
+  const {docs, ...paginationParams} = products;
+
+  res.sendResponse.ok({ data:docs, ...paginationParams});
 };
 controller.addProduct = async (req, res) => {
   const product = req.body;
