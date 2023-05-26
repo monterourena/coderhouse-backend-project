@@ -5,7 +5,7 @@ import {
 } from "../../utils/queries.utils.js";
 const validator = [];
 
-validator.getProducts = (queries) => {
+validator.validateQueries = (queries) => {
   const DEFAULT_LIMIT = 10;
   const DEFAULT_PAGE = 1;
   const DEFAULT_SORT = null;
@@ -49,4 +49,4 @@ validator.getProducts = (queries) => {
   };
 };
 
-export { validator };
+export { validator as productsValidator };

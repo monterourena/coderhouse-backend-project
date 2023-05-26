@@ -11,7 +11,7 @@ class ProductsService {
 
     return productModel.aggregatePaginate(aggregate, { limit, page });
   };
-  getProducts = (params) => productModel.find(params);
+  getProducts = (params) => productModel.find(params).lean();
   addProduct = (params) => productModel.create(params);
   getProductById = (pid) => productModel.findById(pid).lean();
   updateProductById = (pid, params) =>

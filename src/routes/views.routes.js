@@ -8,5 +8,4 @@ router.get("/realtimeproducts", viewsController.realTimeProducts);
 router.get("/chat", viewsController.displayChat)
 
 
-
 export {router as viewsRouter}

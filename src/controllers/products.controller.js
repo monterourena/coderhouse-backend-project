@@ -1,6 +1,6 @@
 import { emitUpdatedProducts } from "../handlers/products.handler.js";
 import { ProductsService } from "../services/products.service.js";
-import { validator } from "./validators/products.validator.js";
+import { productsValidator } from "./validators/products.validator.js";
 
 const controller = [];
 const productsService = new ProductsService();
@@ -9,7 +9,7 @@ controller.getProducts = async (req, res) => {
   const queries = req.query;
 
   // Validation Stage
-  const { isValid, mappedQueries } = validator.getProducts(queries);
+  const { isValid, mappedQueries } = productsValidator.validateQueries(queries);
   if (!isValid) return res.sendResponse.badRequest();
 
   // Query to service

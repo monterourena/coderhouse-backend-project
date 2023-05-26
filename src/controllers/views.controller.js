@@ -1,23 +1,29 @@
 import { ProductsService } from "../services/products.service.js";
+import { productsValidator } from "./validators/products.validator.js";
 
 const controller = [];
+const productsService = new ProductsService();
 
-const productsService = new ProductsService()
+controller.displayProducts = async (req, res) => {
+  const queries = req.query;
 
-controller.displayProducts = async (req, res)=>{
-    const products = await productsService.getProducts()
-    res.render("home",{ products })
-}
-controller.realTimeProducts = async (req, res)=>{
+  // Validation Stage
+  const { isValid, mappedQueries } = productsValidator.validateQueries(queries);
+  if (!isValid) return res.sendResponse.badRequest();
 
-    const products = await productsService.getProducts()
-    res.render("realtimeproducts",{ products })
-}
+  // Query to service
+  const products = await productsService.getPaginatedProducts(mappedQueries);
+  const { docs, ...paginationParams } = products;
 
+  res.render("home", { products: docs, paginationParams });
+};
+controller.realTimeProducts = async (req, res) => {
+  const products = await productsService.getProducts();
+  res.render("realtimeproducts", { products });
+};
 
-controller.displayChat = async (req, res)=>{
-    res.render("chat")
-}
+controller.displayChat = async (req, res) => {
+  res.render("chat");
+};
 
-
-export {controller as viewsController}
+export { controller as viewsController };
