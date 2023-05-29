@@ -2,12 +2,13 @@
 <div>
     {{#each products}}
         <div style="margin: 16px; padding:8px; background-color:#f2e6e8">
-        <h3>{{this.title}}</h3>
-        <h4>{{this.description}}</h4>
-        <p> ID: {{this._id}} Code: {{this.code}}</p>
-        <p> Price: {{this.price}}</p>
-        <p> Status: {{this.status}}</p>
-        <p> Category: {{this.category}}</p>
+            <h3>{{this.title}}</h3>
+            <h4>{{this.description}}</h4>
+            <p> ID: {{this._id}} Code: {{this.code}}</p>
+            <p> Price: {{this.price}}</p>
+            <p> Status: {{this.status}}</p>
+            <p> Category: {{this.category}}</p>
+            <button onclick="addToCart('{{this._id}}')">Add to cart</button>
         </div>
     {{/each}}
 </div>
@@ -27,4 +28,6 @@
     
 
 </div>
+
+<script src="/js/products.handler.js"></script>
 

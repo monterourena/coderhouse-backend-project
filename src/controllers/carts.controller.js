@@ -18,7 +18,7 @@ controller.addProductToCart = async (req, res) => {
   const quantity = parseInt(req.body.quantity);
 
   if (!quantity) {
-    return Response.badRequest(res);
+    res.sendResponse.badRequest({message:{cid, pid}})
   }
 
   const response = await cartsService.addProductToCart(cid, pid, quantity);
