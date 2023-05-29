@@ -7,20 +7,6 @@ class CartsService {
   getCartProducts = (cid) =>
     cartModel.findById(cid).populate("products.product").lean();
 
-  // addProductToCart = (cid, pid, quantity) => {
-  //   return cartModel.updateOne(
-  //     { _id: cid },
-  //     {
-  //       $push: {
-  //         products: {
-  //           product: new mongoose.Types.ObjectId(pid),
-  //           quantity: quantity,
-  //         },
-  //       },
-  //     }
-  //   );
-  // };
-
   addProductToCart = async (cid, pid, quantity) => {
     const cart = await cartModel.findOne({ _id: cid });
     pid = new mongoose.Types.ObjectId(pid);
