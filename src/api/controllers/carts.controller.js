@@ -1,4 +1,4 @@
-import { Response } from "../utils/response.utils.js";
+import { Response } from "../../utils/response.utils.js";
 import { CartsService } from "../services/carts.service.js";
 
 const controller = [];

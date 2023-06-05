@@ -1,4 +1,4 @@
-import { productSchema } from "../../models/product.model.js";
+import { productSchema } from "../models/product.model.js";
 import {
   convertQueriesTypeBySchema,
   hasValidQueriesBySchema,

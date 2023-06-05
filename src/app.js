@@ -7,13 +7,13 @@ import { app } from "./config/express.config.js";
 
 
 // ROUTERS
-import {productsRouter} from "./routes/products.routes.js"
-import {cartsRouter} from "./routes/carts.routes.js"
-import {viewsRouter} from "./routes/views.routes.js"
+import {productsRouter} from "./api/routes/products.routes.js"
+import {cartsRouter} from "./api/routes/carts.routes.js"
+import {viewsRouter} from "./api/routes/views.routes.js"
 
 // MIDDLEWARES
-import {ioMiddleware} from "./middlewares/io.middleware.js";
-import { responseMiddleware } from "./middlewares/response.middleware.js";
+import {ioMiddleware} from "./api/middlewares/io.middleware.js";
+import { responseMiddleware } from "./api/middlewares/response.middleware.js";
 app.use(ioMiddleware)
 app.use(responseMiddleware)
 

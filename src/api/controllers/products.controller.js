@@ -1,6 +1,6 @@
-import { emitUpdatedProducts } from "../handlers/products.handler.js";
+import { emitUpdatedProducts } from "../../handlers/products.handler.js";
 import { ProductsService } from "../services/products.service.js";
-import { productsValidator } from "./validators/products.validator.js";
+import { productsValidator } from "../validations/products.validation.js";
 
 const controller = [];
 const productsService = new ProductsService();

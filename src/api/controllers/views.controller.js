@@ -1,6 +1,6 @@
 import { CartsService } from "../services/carts.service.js";
 import { ProductsService } from "../services/products.service.js";
-import { productsValidator } from "./validators/products.validator.js";
+import { productsValidator } from "../validations/products.validation.js";
 
 const controller = [];
 const productsService = new ProductsService();

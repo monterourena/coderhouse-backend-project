@@ -1,4 +1,4 @@
-import { ChatService } from "../services/chat.service.js";
+import { ChatService } from "../api/services/chat.service.js";
 const chatService = new ChatService();
 
 const chatHandler = (io, socket) => {

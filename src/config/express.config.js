@@ -13,7 +13,7 @@ app.use(express.static(`${__src}/public`))
 // HANDLEBARS
 
 app.engine("handlebars", handlebars.engine())
-app.set("views", `${__src}/views/`)
+app.set("views", `${__src}/api/views/`)
 app.set("view engine", "handlebars")
 
 // LISTENER
