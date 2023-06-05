@@ -1,4 +1,9 @@
-<div><h1>Home View</h1></div>
+<div>
+    <h1>Hola, {{user.name}}</h1>
+    <p>Correo: {{user.email}}</p>
+    <button id="logoutButton">Log out</button>
+</div>
+
 <div>
     {{#each products}}
         <div style="margin: 16px; padding:8px; background-color:#f2e6e8">
@@ -30,4 +35,4 @@
 </div>
 
 <script src="/js/products.handler.js"></script>
-
+<script src="./js/logout.js"></script>

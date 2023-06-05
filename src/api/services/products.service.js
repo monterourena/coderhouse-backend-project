@@ -15,7 +15,7 @@ class ProductsService {
   addProduct = (params) => productModel.create(params);
   getProductById = (pid) => productModel.findById(pid).lean();
   updateProductById = (pid, params) =>
-    productModel.findByIdAndUpdate(pid, { $set: params });
+    productModel.findByIdAndUpdate(pid, { $set: params },{new: true});
   deleteProductById = (pid) => productModel.findByIdAndDelete(pid);
 }
 

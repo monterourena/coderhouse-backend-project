@@ -17,7 +17,7 @@ controller.displayProducts = async (req, res) => {
   const products = await productsService.getPaginatedProducts(mappedQueries);
   const { docs, ...paginationParams } = products;
 
-  res.render("products", { products: docs, paginationParams });
+  res.render("products", { user: req.session.user, products: docs, paginationParams });
 };
 controller.realTimeProducts = async (req, res) => {
   const products = await productsService.getProducts();
@@ -36,5 +36,13 @@ controller.displayCart = async (req, res) =>{
 controller.displayChat = async (req, res) => {
   res.render("chat");
 };
+
+controller.displayLogin = async(req,res) =>{
+  res.render("login")
+}
+controller.displayRegister = async(req,res) =>{
+  res.render("register")
+}
+
 
 export { controller as viewsController };

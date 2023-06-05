@@ -9,3 +9,5 @@ const MONGODB_CONNECTION_URI = `mongodb+srv://${MONGODB_USER}:${MONGODB_PASS}@ma
 const connection = mongoose.connect(MONGODB_CONNECTION_URI, {
   useNewUrlParser: true,
 });
+
+export {MONGODB_CONNECTION_URI, connection}
