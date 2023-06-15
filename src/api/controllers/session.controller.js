@@ -4,27 +4,41 @@ const controller = {};
 const usersService = new UsersService();
 
 controller.registerUser = async (req, res) => {
-  const result = await usersService.createUser(req.body);
-  res.sendResponse.ok({ data: result });
+  res.sendResponse.ok();
 };
 
-controller.loginUser = async (req, res) => {
-  const { email, password } = req.body;
-  const user = await usersService.getUserBy({ email, password });
+controller.failedRegister = async (req, res) =>{
+  res.sendResponse.badRequest({ message: req.session.messages })
+}
 
-  if (!user)
-    return res.sendResponse.notFound({ message: "Wrong email/password" });
+controller.loginUser = async (req, res) => {
+  req.session.user = {
+    name: req.user.name,
+    role: req.user.role,
+    email: req.user.email,
+  } // req.user viene dado por passport
+
+  req.session.save((err) => {
+    err ? res.sendResponse.internalServerError() : res.sendResponse.ok()
+  })
+};
+controller.failedLogin = async (req, res) =>{
+  res.sendResponse.badRequest({ message: req.session.messages })
+}
+
+
+controller.githubAuthCallback= async (req, res) =>{
+  const user = req.user;
 
   req.session.user = {
-    name: `${user.first_name} ${user.last_name}`,
+    id: user._id,
+    name: user.first_name,
     email: user.email,
     role: user.role,
   };
 
-  req.session.save((err) => {
-    err ? res.sendResponse.internalServerError() : res.sendResponse.ok();
-  });
-};
+  res.redirect('/products')
+}
 
 controller.endSession = async (req, res) => {
   req.session.destroy((err) => {
