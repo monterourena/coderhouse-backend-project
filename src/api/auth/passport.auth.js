@@ -19,10 +19,10 @@ const githubStrategyName = 'github'
 const registerOptions = { failureRedirect: '/api/session/failedRegister', failureMessage: true  }
 const loginOptions = { failureRedirect: '/api/session/failedLogin', failureMessage: true }
 
-// Strategies definition
-export const registerStrategy = passport.authenticate(registerStrategyName, registerOptions)
-export const loginStrategy = passport.authenticate(loginStrategyName, loginOptions)
-export const githubStrategy = passport.authenticate(githubStrategyName)
+// Strategies Middlewares
+const registerStrategy = passport.authenticate(registerStrategyName, registerOptions)
+const loginStrategy = passport.authenticate(loginStrategyName, loginOptions)
+const githubStrategy = passport.authenticate(githubStrategyName)
 
 // Strategies configuration
 const registerConfig = { passReqToCallback: true, usernameField: 'email' }
@@ -50,4 +50,4 @@ const initializePassport = () => {
   })
 }
 
-export {initializePassport}
+export {initializePassport, registerStrategy, loginStrategy, githubStrategy}
