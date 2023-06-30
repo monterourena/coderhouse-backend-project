@@ -1,7 +1,9 @@
 import { UsersService } from '../services/users.service.js'
 import { createHash, validatePassword } from '../../utils/crypto.utils.js'
+import { CartsService } from '../services/carts.service.js'
 
 const usersService = new UsersService()
+const cartsService = new CartsService()
 
 const PROVIDERS = { LOCAL: 'local', GITHUB: 'github' }
 const ROLES = { USER: 'user', ADMIN: 'admin' }
@@ -12,6 +14,8 @@ const registerRules = async (req, email, password, done) => {
     const exists = await usersService.getUserBy({ email })
     if (exists) return done(null, false, { message: 'User already exists' })
 
+    // Aquí se crea el nuevo cart y se agrega al usuario
+    const cart = await cartsService.createCart()
     const hashedPassword = await createHash(password)
     const user = {
       first_name,
@@ -20,6 +24,7 @@ const registerRules = async (req, email, password, done) => {
       email,
       password: hashedPassword,
       provider: PROVIDERS.LOCAL,
+      cart: cart
     }
     const result = await usersService.createUser(user)
 
@@ -43,6 +48,7 @@ const loginRules = async (email, password, done) => {
       name: `${user.first_name} ${user.last_name}`,
       email: user.email,
       role: user.role,
+      cart: user.cart
     }
 
     done(null, user)
@@ -56,11 +62,14 @@ const githubRules = async (accessToken, refreshToken, profile, done) => {
     const email = profile?.emails[0].value
     const { name } = profile._json
 
-    const user = await usersService.getUserBy({ email })
+    let user = await usersService.getUserBy({ email })
 
     if (!email) return done(null, false, { message: 'Unable to get an email linked to this account' })
 
+    // Aquí se hace el nuevo cart y se le envía al usuario
+
     if (!user) {
+      const cart = await cartsService.createCart()
       const response = await usersService.createUser({
         email,
         first_name: name,
@@ -68,9 +77,18 @@ const githubRules = async (accessToken, refreshToken, profile, done) => {
         password: '',
         role: ROLES.USER,
         provider: PROVIDERS.GITHUB,
+        cart: cart._id
       })
 
       return done(null, response)
+    }
+
+    user = {
+      id: user._id,
+      name: `${user.first_name} ${user.last_name}`,
+      email: user.email,
+      role: user.role,
+      cart: user.cart
     }
 
     done(null, user)
@@ -79,4 +97,8 @@ const githubRules = async (accessToken, refreshToken, profile, done) => {
   }
 }
 
-export { githubRules, loginRules, registerRules }
+const jwtRules = async (payload, done) => {
+  return done(null, payload)
+}
+
+export { githubRules, loginRules, registerRules, jwtRules }

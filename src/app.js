@@ -1,4 +1,4 @@
-import passport from "passport"
+import cookieParser from "cookie-parser";
 
 // CONFIGURATION
 import "./config/env.config.js"
@@ -15,20 +15,22 @@ import {viewsRouter} from "./api/routes/views.routes.js"
 import { sessionRouter } from "./api/routes/session.routes.js";
 
 // MIDDLEWARES
-import "./api/middlewares/session.middleware.js"
 import {ioMiddleware} from "./api/middlewares/io.middleware.js";
 import { responseMiddleware } from "./api/middlewares/response.middleware.js";
 
+
 // PASSPORT
 import { initializePassport } from "./api/auth/passport.auth.js";
+import { passportCall } from "./api/middlewares/passport.middleware.js";
 
 // MIDDLEWARES
+app.use(cookieParser())
 app.use(ioMiddleware)
 app.use(responseMiddleware)
 
 // PASSPORT
-app.use(passport.initialize())
 initializePassport()
+app.use(passportCall('current'))
 
 // ROUTES
 

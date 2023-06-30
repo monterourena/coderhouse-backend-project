@@ -1,7 +1,12 @@
 <div><h1>Products in cart</h1></div>
 <div>
+  <button id='currentButton'>Profile</button>
+  <button id='productsButton'>Check products</button>
+  <button id='logoutButton'>Log out</button>
+</div>
+<div>
   {{#each products}}
-    <div style="margin: 16px; padding:8px; background-color:#f2e6e8">
+    <div style='margin: 16px; padding:8px; background-color:#f2e6e8'>
       <h2>{{this.product.title}}</h2>
       <h4>Description: {{this.product.description}}</h4>
       <h4>Quantity: {{this.quantity}}</h4>
@@ -11,3 +16,5 @@
     </div>
   {{/each}}
 </div>
+
+<script src='./js/cartView.utils.js'></script>

@@ -4,6 +4,10 @@ import { routingPolicy, requiredRole } from "../middlewares/auth.middleware.js";
 
 const router = Router();
 
+router.get( "/current",
+  routingPolicy("AUTH_USERS_ONLY"),
+  viewsController.currentUser
+);
 router.get( "/products",
   routingPolicy("AUTH_USERS_ONLY"),
   requiredRole(["admin", "user"]),

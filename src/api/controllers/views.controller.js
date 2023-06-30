@@ -6,6 +6,10 @@ const controller = [];
 const productsService = new ProductsService();
 const cartsService = new CartsService()
 
+controller.currentUser = async(req, res) => {
+  res.render("currentUser", { user: req.user })
+}
+
 controller.displayProducts = async (req, res) => {
   const queries = req.query;
   // Validation Stage
@@ -17,7 +21,7 @@ controller.displayProducts = async (req, res) => {
   const products = await productsService.getPaginatedProducts(mappedQueries);
   const { docs, ...paginationParams } = products;
 
-  res.render("products", { user: req.session.user, products: docs, paginationParams });
+  res.render("products", { user: req.user, products: docs, paginationParams });
 };
 controller.realTimeProducts = async (req, res) => {
   const products = await productsService.getProducts();
@@ -25,10 +29,8 @@ controller.realTimeProducts = async (req, res) => {
 };
 
 controller.displayCart = async (req, res) =>{
-  const DEFAULT_CART_ID = "6470f7907ba3639eb9354505"
-  const {cid=DEFAULT_CART_ID} = req.query;
-
-  const productsInCart = await cartsService.getCartProducts(cid);
+  
+  const productsInCart = await cartsService.getCartProducts(req.user.cart);
 
   res.render("cart", {products:productsInCart.products})
 }

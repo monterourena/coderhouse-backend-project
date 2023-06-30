@@ -1,49 +1,49 @@
-import { UsersService } from "../services/users.service.js";
+import { generateToken } from "../../utils/jwt.utils.js";
 
 const controller = {};
-const usersService = new UsersService();
 
 controller.registerUser = async (req, res) => {
   res.sendResponse.ok();
 };
 
-controller.failedRegister = async (req, res) =>{
-  res.sendResponse.badRequest({ message: req.session.messages })
-}
-
 controller.loginUser = async (req, res) => {
-  req.session.user = {
+  const user = {
     name: req.user.name,
     role: req.user.role,
     email: req.user.email,
+    cart: req.user.cart,
   } // req.user viene dado por passport
 
-  req.session.save((err) => {
-    err ? res.sendResponse.internalServerError() : res.sendResponse.ok()
-  })
-};
-controller.failedLogin = async (req, res) =>{
-  res.sendResponse.badRequest({ message: req.session.messages })
-}
+  const accessToken = generateToken(user)
+  const cookieExpirationTime = process.env.JWT_COOKIE_EXP_TIME_MS
+  const cookieName = process.env.JWT_COOKIE_NAME
+  res.cookie(cookieName, accessToken, {
+    maxAge: cookieExpirationTime,
+    httpOnly: true
+  }).sendResponse.ok()
 
+};
 
 controller.githubAuthCallback= async (req, res) =>{
-  const user = req.user;
-
-  req.session.user = {
-    id: user._id,
-    name: user.first_name,
-    email: user.email,
-    role: user.role,
+  const user = {
+    name: req.user.name,
+    role: req.user.role,
+    email: req.user.email,
+    cart: req.user.cart,
   };
 
-  res.redirect('/products')
+  const accessToken = generateToken(user)
+  const cookieExpirationTime = process.env.JWT_COOKIE_EXP_TIME_MS
+  const cookieName = process.env.JWT_COOKIE_NAME
+  res.cookie(cookieName, accessToken, {
+    maxAge: cookieExpirationTime,
+    httpOnly: true
+  }).redirect('/products')
 }
 
 controller.endSession = async (req, res) => {
-  req.session.destroy((err) => {
-    err ? res.sendResponse.internalServerError() : res.sendResponse.ok();
-  });
+  const cookieName = process.env.JWT_COOKIE_NAME
+  res.clearCookie(cookieName).redirect('/login')
 };
 
 

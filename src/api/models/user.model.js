@@ -8,7 +8,8 @@ const schema = new mongoose.Schema({
     email:String,
     password:String,
     role:String,
-    provider:String
+    provider:String,
+    cart: mongoose.SchemaTypes.ObjectId
 })
 
 

@@ -2,12 +2,12 @@ const routingPolicy = (policy) => (req, res, next) => {
 
   switch (policy) {
     case "AUTH_USERS_ONLY":
-      if (req.session.user) {next()} 
+      if (req.user) {next()} 
       else {res.redirect("/login")}
       break;
 
     case "NOT_AUTH_USERS_ONLY":
-      if (!req.session.user) {next()} 
+      if (!req.user) {next()} 
       else {res.redirect("/products")}
       break;
   
@@ -19,7 +19,7 @@ const routingPolicy = (policy) => (req, res, next) => {
 const requiredRole = (validRoles) => (req, res, next) => {
   // validRoles: Array of strings
 
-  if (validRoles.includes(req.session.user.role)) {
+  if (validRoles.includes(req.user.role)) {
     next();
   } else {
     res.sendResponse.forbidden({ message: "Invalid Role" });

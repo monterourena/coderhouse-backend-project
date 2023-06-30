@@ -10,13 +10,11 @@ const settings = {
   body:JSON.stringify(bodyContent)
 };
 
-const addToCart = async (pid) => {
-  const DEFAULT_CART_ID = "6470f7907ba3639eb9354505";
+const addToCart = async (cid, pid) => {
   const fetchResponse = await fetch(
-    `http://localhost:8080/api/carts/${DEFAULT_CART_ID}/products/${pid}`,
+    `http://localhost:8080/api/carts/${cid}/products/${pid}`,
     settings
   );
   const data = await fetchResponse.json();
   return data;
-  console.log(result);
 };
