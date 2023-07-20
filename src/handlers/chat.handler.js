@@ -1,5 +1,5 @@
-import { ChatService } from "../api/services/chat.service.js";
-const chatService = new ChatService();
+import { Services } from "../api/services/services.js";
+const chatService = Services.chat
 
 const chatHandler = (io, socket) => {
   const saveMessage = async (data) => {

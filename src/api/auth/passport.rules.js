@@ -1,9 +1,8 @@
-import { UsersService } from '../services/users.service.js'
 import { createHash, validatePassword } from '../../utils/crypto.utils.js'
-import { CartsService } from '../services/carts.service.js'
+import { Services } from '../services/services.js'
 
-const usersService = new UsersService()
-const cartsService = new CartsService()
+const usersService = Services.users
+const cartsService = Services.carts
 
 const PROVIDERS = { LOCAL: 'local', GITHUB: 'github' }
 const ROLES = { USER: 'user', ADMIN: 'admin' }

@@ -1,6 +1,6 @@
 import { productModel } from "../models/product.model.js";
 
-class ProductsService {
+class ProductsManager {
   getPaginatedProducts = (params) => {
     const { limit, page, sort, queryFilters } = params;
     
@@ -19,4 +19,4 @@ class ProductsService {
   deleteProductById = (pid) => productModel.findByIdAndDelete(pid);
 }
 
-export { ProductsService };
+export { ProductsManager };

@@ -1,7 +1,7 @@
 import { Response } from "../../utils/response.utils.js";
-import { CartsService } from "../services/carts.service.js";
+import { Services } from "../services/services.js";
 
-const cartsService = new CartsService();
+const cartsService = Services.carts
 
 export class CartsController{
   createCart = async (req, res) => {

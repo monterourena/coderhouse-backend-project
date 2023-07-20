@@ -1,9 +1,11 @@
-import { productSchema } from "../models/product.model.js";
+import { Schemas } from "../dao/mongo/models/models.js";
 import {
   convertQueriesTypeBySchema,
   hasValidQueriesBySchema,
 } from "../../utils/queries.utils.js";
+
 const validator = [];
+const productSchema = Schemas.product
 
 validator.validateQueries = (queries) => {
   const DEFAULT_LIMIT = 10;

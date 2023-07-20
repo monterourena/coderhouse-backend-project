@@ -1,8 +1,8 @@
 import { emitUpdatedProducts } from "../../handlers/products.handler.js";
-import { ProductsService } from "../services/products.service.js";
 import { productsValidator } from "../validations/products.validation.js";
+import { Services } from "../services/services.js";
 
-const productsService = new ProductsService();
+const productsService = Services.products
 
 export class ProductsController {
   getProducts = async (req, res) => {

@@ -1,6 +1,7 @@
-import { ProductsService } from "../api/services/products.service.js";
+import { Services } from "../api/services/services.js";
 
-const productsService = new ProductsService();
+
+const productsService = Services.products
 
 const emitUpdatedProducts = async (io) => {
   const allProducts = await productsService.getProducts();

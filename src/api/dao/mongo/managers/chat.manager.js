@@ -1,6 +1,6 @@
 import { messageModel } from "../models/message.model.js";
 
-class ChatService {
+class ChatManager {
   createMessage = (data) => {
     return messageModel.create(data);
   };
@@ -10,4 +10,4 @@ class ChatService {
   };
 }
 
-export { ChatService };
+export { ChatManager };

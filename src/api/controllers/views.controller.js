@@ -1,9 +1,8 @@
-import { CartsService } from '../services/carts.service.js'
-import { ProductsService } from '../services/products.service.js'
 import { productsValidator } from '../validations/products.validation.js'
+import { Services } from "../services/services.js";
 
-const productsService = new ProductsService()
-const cartsService = new CartsService()
+const productsService = Services.products
+const cartsService = Services.carts
 
 export class ViewsController {
   currentUser = async (req, res) => {

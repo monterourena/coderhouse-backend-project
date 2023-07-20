@@ -2,7 +2,6 @@ import cookieParser from "cookie-parser";
 
 // CONFIGURATION
 import "./config/env.config.js"
-import "./config/mongodb.config.js"
 import "./config/io.config.js"
 
 // EXPRESS SERVER

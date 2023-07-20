@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { cartModel } from "../models/cart.model.js";
 
-class CartsService {
+class CartsManager {
   createCart = () => cartModel.create({ products: [] });
 
   getCartProducts = (cid) =>
@@ -55,4 +55,4 @@ class CartsService {
   };
 }
 
-export { CartsService };
+export { CartsManager };
