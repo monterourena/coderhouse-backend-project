@@ -1,6 +1,7 @@
 import { Router } from 'express'
 // import { Controllers } from '../controllers/controllers.js'
 import { Middlewares } from '../middlewares/middlewares.js'
+import { Controllers } from '../controllers/controllers.js'
 
 export default class CoreRouter {
   constructor() {
@@ -19,6 +20,10 @@ export default class CoreRouter {
   handlePolicies = Middlewares.routingPolicies
 
   // CONTROLLERS
+  sessionController = Controllers.session
+  viewsController = Controllers.views
+  cartsController = Controllers.carts
+  productsController = Controllers.products
 
   // ROUTES
   get(path, ...callbacks) {
