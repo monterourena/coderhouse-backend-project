@@ -1,38 +1,41 @@
-import { Router } from "express";
+import Router from "./router.js";
 import { viewsController } from "../controllers/views.controller.js";
 import { routingPolicy, requiredRole } from "../middlewares/auth.middleware.js";
 
-const router = Router();
+export default class ViewsRouter extends Router{
+  routes(){
+    this.get( "/current",
+      routingPolicy("AUTH_USERS_ONLY"),
+      viewsController.currentUser
+    );
+    this.get( "/products",
+      routingPolicy("AUTH_USERS_ONLY"),
+      requiredRole(["admin", "user"]),
+      viewsController.displayProducts
+    );
+    this.get( "/cart",
+      routingPolicy("AUTH_USERS_ONLY"),
+      viewsController.displayCart
+    );
+    this.get( "/realtimeproducts",
+      routingPolicy("AUTH_USERS_ONLY"),
+      viewsController.realTimeProducts
+    );
+    this.get( "/chat",
+      routingPolicy("AUTH_USERS_ONLY"),
+      viewsController.displayChat
+    );
+    
+    this.get( "/login",
+      routingPolicy("NOT_AUTH_USERS_ONLY"),
+      viewsController.displayLogin
+    );
+    this.get( "/register",
+      routingPolicy("NOT_AUTH_USERS_ONLY"),
+      viewsController.displayRegister
+    );
 
-router.get( "/current",
-  routingPolicy("AUTH_USERS_ONLY"),
-  viewsController.currentUser
-);
-router.get( "/products",
-  routingPolicy("AUTH_USERS_ONLY"),
-  requiredRole(["admin", "user"]),
-  viewsController.displayProducts
-);
-router.get( "/cart",
-  routingPolicy("AUTH_USERS_ONLY"),
-  viewsController.displayCart
-);
-router.get( "/realtimeproducts",
-  routingPolicy("AUTH_USERS_ONLY"),
-  viewsController.realTimeProducts
-);
-router.get( "/chat",
-  routingPolicy("AUTH_USERS_ONLY"),
-  viewsController.displayChat
-);
+  }
+}
 
-router.get( "/login",
-  routingPolicy("NOT_AUTH_USERS_ONLY"),
-  viewsController.displayLogin
-);
-router.get( "/register",
-  routingPolicy("NOT_AUTH_USERS_ONLY"),
-  viewsController.displayRegister
-);
 
-export { router as viewsRouter };

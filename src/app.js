@@ -9,10 +9,10 @@ import "./config/io.config.js"
 import { app } from "./config/express.config.js";
 
 // ROUTERS
-import {productsRouter} from "./api/routes/products.routes.js"
-import {cartsRouter} from "./api/routes/carts.routes.js"
-import {viewsRouter} from "./api/routes/views.routes.js"
-import { sessionRouter } from "./api/routes/session.routes.js";
+import ProductsRouter from "./api/routes/products.routes.js"
+import CartsRouter from "./api/routes/carts.routes.js"
+import ViewsRouter from "./api/routes/views.routes.js"
+import SessionRouter from "./api/routes/session.routes.js";
 
 // MIDDLEWARES
 import {ioMiddleware} from "./api/middlewares/io.middleware.js";
@@ -32,7 +32,12 @@ app.use(responseMiddleware)
 initializePassport()
 app.use(passportCall('current'))
 
-// ROUTES
+// ROUTES AND ROUTERS
+const productsRouter = new ProductsRouter().router
+const cartsRouter = new CartsRouter().router
+const viewsRouter = new ViewsRouter().router
+const sessionRouter = new SessionRouter().router
+
 
 app.use("/", viewsRouter)
 app.use("/api/products", productsRouter);
