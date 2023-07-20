@@ -1,12 +1,20 @@
 import { productsValidator } from '../validations/products.validation.js'
 import { Services } from "../services/services.js";
+import { DTOs } from '../dto/dtos.js';
 
 const productsService = Services.products
 const cartsService = Services.carts
 
 export class ViewsController {
   currentUser = async (req, res) => {
-    res.render('currentUser', { user: req.user })
+    const user = req.user    
+    const currentUser = DTOs.currentUser(user).data
+
+    if(currentUser.role === "admin"){
+      return res.render('current-admin', { user: currentUser })
+    }
+
+    res.render('currentUser', { user: currentUser })
   }
 
   displayProducts = async (req, res) => {
@@ -20,7 +28,14 @@ export class ViewsController {
     const products = await productsService.getPaginatedProducts(mappedQueries)
     const { docs, ...paginationParams } = products
 
-    res.render('products', { user: req.user, products: docs, paginationParams })
+    const user = req.user    
+    const currentUser = DTOs.currentUser(user).data
+
+    if(currentUser.role === "admin"){
+      return res.render('products-admin', { user: currentUser, products: docs, paginationParams })
+    }
+
+    return res.render('products', { user: currentUser, products: docs, paginationParams })
   }
   realTimeProducts = async (req, res) => {
     const products = await productsService.getProducts()

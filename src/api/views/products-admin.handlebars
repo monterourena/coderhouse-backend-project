@@ -2,7 +2,6 @@
   <h1>Hola, {{user.name}}</h1>
   <div>
     <button id='currentButton'>Profile</button>
-    <button id='cartButton'>Review cart</button>
     <button id='logoutButton'>Log out</button>
   </div>
 </div>
@@ -18,7 +17,8 @@
       <p> Price: {{this.price}}</p>
       <p> Status: {{this.status}}</p>
       <p> Category: {{this.category}}</p>
-      <button onclick="addToCart('{{../user.cart}}','{{this._id}}')">Add to cart</button>
+      <button onclick="">Edit</button>
+      <button onclick="">Delete</button>
     </div>
   {{/each}}
 
