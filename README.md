@@ -15,5 +15,18 @@ npm install
 ```console
 npm run dev
 ```
-
-
+## Demo
+### Views
+```console
+- http://localhost:8080/login
+- http://localhost:8080/register
+- http://localhost:8080/products
+- http://localhost:8080/current
+- http://localhost:8080/realTimeProducts
+```
+### Admin credentials
+- Email: tutor@coderhouse.com
+- Password: coderPass1234
+### User credentials
+- Email: david@coderhouse.com
+- Password: coderPass1234
