@@ -23,6 +23,7 @@ npm run dev
 - http://localhost:8080/products
 - http://localhost:8080/current
 - http://localhost:8080/realTimeProducts
+- http://localhost:8080/mockingProducts
 ```
 ### Admin credentials
 - Email: tutor@coderhouse.com
