@@ -24,12 +24,14 @@ export default class CoreRouter {
   viewsController = Controllers.views
   cartsController = Controllers.carts
   productsController = Controllers.products
+  mocksController = Controllers.mocks
+
 
   // ROUTES
   get(path, ...callbacks) {
     this.router.get(
         path, 
-        // this.customResponses, 
+        this.customResponses, 
         // this.handlePolicies(policies), 
         this.applyCallbacks(callbacks)
     )
@@ -37,7 +39,7 @@ export default class CoreRouter {
   post(path, ...callbacks) {
     this.router.post(
         path,
-        // this.customResponses,
+        this.customResponses,
         // this.handlePolicies(policies),
         this.applyCallbacks(callbacks)
     )
@@ -45,7 +47,7 @@ export default class CoreRouter {
   put(path, ...callbacks) {
     this.router.put(
         path, 
-        // this.customResponses, 
+        this.customResponses, 
         // this.handlePolicies(policies), 
         this.applyCallbacks(callbacks)
     )
@@ -53,7 +55,7 @@ export default class CoreRouter {
   delete(path, ...callbacks) {
     this.router.delete(
         path,
-        // this.customResponses,
+        this.customResponses,
         // this.handlePolicies(policies),
         this.applyCallbacks(callbacks)
     )

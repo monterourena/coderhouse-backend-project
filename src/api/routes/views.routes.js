@@ -2,6 +2,11 @@ import Router from "./router.js";
 import { routingPolicy, requiredRole } from "../middlewares/auth.middleware.js";
 export default class ViewsRouter extends Router{
   routes(){
+
+    this.get("/mockingProducts", 
+      this.mocksController.getMockProducts
+    )
+
     this.get( "/current",
       routingPolicy("AUTH_USERS_ONLY"),
       this.viewsController.currentUser
