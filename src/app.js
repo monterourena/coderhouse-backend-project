@@ -31,6 +31,7 @@ app.use(responseMiddleware)
 initializePassport()
 app.use(passportCall('current'))
 
+
 // ROUTES AND ROUTERS
 const productsRouter = new ProductsRouter().router
 const cartsRouter = new CartsRouter().router
