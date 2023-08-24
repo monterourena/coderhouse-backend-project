@@ -1,0 +1,68 @@
+paths:
+  /api/products:
+    get:
+      summary: Return all the products in database
+      tags:
+        - Products
+      responses:
+        "200":
+          description: Users retrieved successfully
+          content: 
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/Products'
+
+        "500":
+          description: Internal server error caused by problems related to the database connection
+    post:
+      summary: Add a new product
+      tags:
+        - Products
+  /api/products/{pid}:
+    get:
+        summary: Get product by its ID
+        tags:
+          - Products
+        parameters:
+          - name: pid
+            in: path
+            required: true
+            description: Product id
+            schema:
+              type: string
+              
+          
+    put:
+        summary: Update a product by its ID
+        tags:
+          - Products
+    delete:
+        summary: Delete a product by its ID
+        tags:
+          - Products
+
+components:
+  schemas:
+    Products:
+      type: object
+      properties:
+        title: 
+          type: string
+          description: Product name
+        description:
+          type: string
+          description: Product description
+        code:
+          type: string
+          description: Product code
+        price:
+          type: number
+          description: Product price
+
+    
+
+
+
+

@@ -1,4 +1,6 @@
 import cookieParser from "cookie-parser";
+import swaggerJSDoc from "swagger-jsdoc";
+import swaggerUiExpress from 'swagger-ui-express'
 
 // CONFIGURATION
 import "./config/env.config.js"
@@ -21,6 +23,7 @@ import { responseMiddleware } from "./api/middlewares/response.middleware.js";
 // PASSPORT
 import { initializePassport } from "./api/auth/passport.auth.js";
 import { passportCall } from "./api/middlewares/passport.middleware.js";
+import { __src } from "./utils/directories.utils.js";
 
 // MIDDLEWARES
 app.use(cookieParser())
@@ -31,6 +34,22 @@ app.use(responseMiddleware)
 initializePassport()
 app.use(passportCall('current'))
 
+
+// Swagger
+
+const swaggerOptions = {
+    definition: {
+        openapi: '3.0.1',
+        info:{
+            title: 'Documentation Ecommerce',
+            description: 'Main documentation description'
+        }
+    },
+    apis:[`${__src}/docs/**/*.yaml`]
+}
+
+const specs = swaggerJSDoc(swaggerOptions)
+app.use('/docs', swaggerUiExpress.serve, swaggerUiExpress.setup(specs))
 
 // ROUTES AND ROUTERS
 const productsRouter = new ProductsRouter().router
