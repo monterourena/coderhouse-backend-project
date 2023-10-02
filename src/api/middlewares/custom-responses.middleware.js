@@ -147,6 +147,7 @@ const messages = {
 }
 
 export default function middleware(req, res, next) {
+  res.sendCreated = ({ message, data, ...args } = {}) => rp(res, codes.CREATED, messages.CREATED, message, data, args)
   res.sendSuccess = ({ message, data, ...args } = {}) => rp(res, codes.OK, messages.OK, message, data, args)
   res.sendBadRequest = ({ message, data, ...args } = {}) =>
     rp(res, codes.BAD_REQUEST, messages.BAD_REQUEST, message, data, args)

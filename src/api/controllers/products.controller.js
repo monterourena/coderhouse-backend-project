@@ -1,4 +1,3 @@
-import { emitUpdatedProducts } from "../../handlers/products.handler.js";
 import { productsValidator } from "../validations/products.validation.js";
 import { Services } from "../services/services.js";
 
@@ -16,33 +15,27 @@ export class ProductsController {
     const products = await productsService.getPaginatedProducts(mappedQueries);
     const {docs, ...paginationParams} = products;
   
-    res.sendResponse.ok({ data:docs, ...paginationParams});
+    res.sendSuccess({ data:docs, ...paginationParams});
   };
   addProduct = async (req, res) => {
     const product = req.body;
     const result = await productsService.addProduct(product);
-  
-    emitUpdatedProducts(req.io);
-    res.sendResponse.created({ data: result });
+    res.sendCreated({ data: result });
   };
   getProductById = async (req, res) => {
     const pid = req.params.pid;
     const product = await productsService.getProductById(pid);
-    res.sendResponse.ok({ data: product });
+    res.sendSuccess({ data: product });
   };
   updateProductById = async (req, res) => {
     const pid = req.params.pid;
     const params = req.body;
     const updatedProduct = await productsService.updateProductById(pid, params);
-  
-    emitUpdatedProducts(req.io);
-    res.sendResponse.ok({ data: updatedProduct });
+    res.sendSuccess({ data: updatedProduct });
   };
   deleteProductById = async (req, res) => {
     const pid = req.params.pid;
     const deletedProduct = await productsService.deleteProductById(pid);
-  
-    emitUpdatedProducts(req.io);
-    res.sendResponse.ok({ data: deletedProduct });
+    res.sendSuccess({ data: deletedProduct });
   };
 }

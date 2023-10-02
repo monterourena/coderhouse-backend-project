@@ -24,15 +24,12 @@ export default class CoreRouter {
   viewsController = Controllers.views
   cartsController = Controllers.carts
   productsController = Controllers.products
-  mocksController = Controllers.mocks
-
 
   // ROUTES
   get(path, ...callbacks) {
     this.router.get(
         path, 
         this.customResponses, 
-        // this.handlePolicies(policies), 
         this.applyCallbacks(callbacks)
     )
   }
@@ -40,7 +37,6 @@ export default class CoreRouter {
     this.router.post(
         path,
         this.customResponses,
-        // this.handlePolicies(policies),
         this.applyCallbacks(callbacks)
     )
   }
@@ -48,7 +44,6 @@ export default class CoreRouter {
     this.router.put(
         path, 
         this.customResponses, 
-        // this.handlePolicies(policies), 
         this.applyCallbacks(callbacks)
     )
   }
@@ -56,7 +51,6 @@ export default class CoreRouter {
     this.router.delete(
         path,
         this.customResponses,
-        // this.handlePolicies(policies),
         this.applyCallbacks(callbacks)
     )
   }
@@ -66,7 +60,7 @@ export default class CoreRouter {
       try {
         return await callback.apply(this, params)
       } catch (error) {
-        params[1].status(500).send(error) //params[1] === res
+        params[1].status(500).send(error)
       }
     })
   }

@@ -4,7 +4,6 @@ import swaggerUiExpress from 'swagger-ui-express'
 
 // CONFIGURATION
 import "./config/env.config.js"
-import "./config/io.config.js"
 
 // EXPRESS SERVER
 import { app } from "./config/express.config.js";
@@ -15,11 +14,6 @@ import CartsRouter from "./api/routes/carts.routes.js"
 import ViewsRouter from "./api/routes/views.routes.js"
 import SessionRouter from "./api/routes/session.routes.js";
 
-// MIDDLEWARES
-import {ioMiddleware} from "./api/middlewares/io.middleware.js";
-import { responseMiddleware } from "./api/middlewares/response.middleware.js";
-
-
 // PASSPORT
 import { initializePassport } from "./api/auth/passport.auth.js";
 import { passportCall } from "./api/middlewares/passport.middleware.js";
@@ -27,8 +21,6 @@ import { __src } from "./utils/directories.utils.js";
 
 // MIDDLEWARES
 app.use(cookieParser())
-app.use(ioMiddleware)
-app.use(responseMiddleware)
 
 // PASSPORT
 initializePassport()

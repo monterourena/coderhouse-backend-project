@@ -2,7 +2,7 @@ import { generateToken } from "../../utils/jwt.utils.js";
 
 export class SessionController{
   registerUser = async (req, res) => {
-    res.sendResponse.ok();
+    res.sendSuccess();
   };
   
   loginUser = async (req, res) => {
@@ -19,7 +19,7 @@ export class SessionController{
     res.cookie(cookieName, accessToken, {
       maxAge: cookieExpirationTime,
       httpOnly: true
-    }).sendResponse.ok()
+    }).sendSuccess()
   
   };
   

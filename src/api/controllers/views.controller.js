@@ -37,21 +37,11 @@ export class ViewsController {
 
     return res.render('products', { user: currentUser, products: docs, paginationParams })
   }
-  realTimeProducts = async (req, res) => {
-    const products = await productsService.getProducts()
-    res.render('realtimeproducts', { products })
-  }
-
   displayCart = async (req, res) => {
     const productsInCart = await cartsService.getCartProducts(req.user.cart)
 
     res.render('cart', { products: productsInCart.products })
   }
-
-  displayChat = async (req, res) => {
-    res.render('chat')
-  }
-
   displayLogin = async (req, res) => {
     res.render('login')
   }
