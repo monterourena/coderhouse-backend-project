@@ -1,5 +1,6 @@
 import { productsValidator } from "../validations/products.validation.js";
 import { Services } from "../services/services.js";
+import { DTOs } from "../dto/dtos.js";
 
 const productsService = Services.products
 
@@ -18,7 +19,7 @@ export class ProductsController {
     res.sendSuccess({ data:docs, ...paginationParams});
   };
   addProduct = async (req, res) => {
-    const product = req.body;
+    const product = DTOs.newProduct(req.body)
     const result = await productsService.addProduct(product);
     res.sendCreated({ data: result });
   };
