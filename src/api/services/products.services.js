@@ -20,4 +20,7 @@ export class ProductsServices{
     deleteProductById = (pid) => {
         return this.manager.deleteProductById(pid)
     }
+    decreaseStockManyProducts = (purchasedProducts) => {
+        return this.manager.decreaseStockManyProducts(purchasedProducts)
+    }
 }

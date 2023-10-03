@@ -17,6 +17,16 @@ class ProductsManager {
   updateProductById = (pid, params) =>
     productModel.findByIdAndUpdate(pid, { $set: params },{new: true});
   deleteProductById = (pid) => productModel.findByIdAndDelete(pid);
+
+  decreaseStockManyProducts = (purchasedProducts) => {
+    purchasedProducts.forEach(async product => {
+      const { id, quantity } = product;
+      await productModel.updateOne(
+        { _id: id },
+        { $inc: { stock: -quantity } }
+      );
+    })
+  }
 }
 
 export { ProductsManager };

@@ -53,6 +53,14 @@ class CartsManager {
       { new: true }
     );
   };
+
+  deleteManyProducts = (cid, pids) => {
+    return cartModel.updateOne({_id: cid}, {
+      $pull: {
+        products: { product: { $in: pids } },
+      },
+    })
+  }
 }
 
 export { CartsManager };

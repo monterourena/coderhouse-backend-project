@@ -10,7 +10,7 @@ export default class NewProductDTO {
       this.stock =product.stock
       this.category = product.category
       this.thumbnails = product.thumbnails
-      this.owner = product.owner | 'ADMIN'
+      this.owner = product.owner || 'ADMIN'
     }
 
     get data() {

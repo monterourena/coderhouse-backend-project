@@ -23,6 +23,10 @@ export class CartsServices{
     deleteOneProduct = (cid, pid) => {
         return this.manager.deleteOneProduct(cid, pid)
     }
+    deleteManyProducts = (cid, purchasedProducs) => {
+        const pids = purchasedProducs.map((product)=> product.id)
+        return this.manager.deleteManyProducts(cid, pids)
+    }
 
 
 }

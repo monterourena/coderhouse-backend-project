@@ -151,6 +151,8 @@ export default function middleware(req, res, next) {
   res.sendSuccess = ({ message, data, ...args } = {}) => rp(res, codes.OK, messages.OK, message, data, args)
   res.sendBadRequest = ({ message, data, ...args } = {}) =>
     rp(res, codes.BAD_REQUEST, messages.BAD_REQUEST, message, data, args)
+  res.sendInternalServerError = ({ message, data, ...args } = {}) =>
+    rp(res, codes.INTERNAL_SERVER_ERROR, messages.INTERNAL_SERVER_ERROR, message, data, args)
   res.sendForbidden = ({ message, data, ...args } = {}) =>
     rp(res, codes.FORBIDDEN, messages.FORBIDDEN, message, data, args)
   res.sendUnauthorized = ({ message, data, ...args } = {}) =>

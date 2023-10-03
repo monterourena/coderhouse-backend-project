@@ -19,7 +19,7 @@ export class ProductsController {
     res.sendSuccess({ data:docs, ...paginationParams});
   };
   addProduct = async (req, res) => {
-    const product = DTOs.newProduct(req.body)
+    const product = DTOs.newProduct(req.body).data
     const result = await productsService.addProduct(product);
     res.sendCreated({ data: result });
   };
