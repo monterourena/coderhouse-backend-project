@@ -5,6 +5,7 @@ const cartsService = Services.carts
 const ticketsService = Services.tickets
 const usersService = Services.users
 const productsService = Services.products
+const ms = Services.mailing
 
 export class CartsController {
   createCart = async (req, res) => {
@@ -66,12 +67,24 @@ export class CartsController {
       await productsService.decreaseStockManyProducts(ticket.purchasedItemsMetadata)
       await cartsService.deleteManyProducts(cid, ticket.purchasedItemsMetadata)
       const response = await ticketsService.createTicket(ticket.details)
-      const hasNonPurchasableItem = ticket.cartProducts.length != ticket.purchasedItems.length
 
-      // Enviar Email aquí
+      if (ticket.purchasedItems.length === 0) {
+        await ms.sendEmail(ms.templates.TICKET_NO_STOCK, {recipient: cartOwner.email})
+        return res.sendUnprocessableEntity({
+          message:
+            'Your request could not be processed, there is not enough stock for any of your products in the cart.'
+        })
+      }
+
+      const isPartialPurchase = ticket.cartProducts.length != ticket.purchasedItems.length
+
+      await ms.sendEmail(ms.templates.TICKET_PROCESSED, {
+        recipient: cartOwner.email,
+        products: ticket.purchasedItems,
+        isPartialPurchase
+      })
 
       return res.sendSuccess({ data: response })
-
     } catch (error) {
       if (error.name === 'CastError') {
         return res.sendBadRequest({ message: 'Invalid Cart ID' })

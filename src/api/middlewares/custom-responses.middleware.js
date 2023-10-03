@@ -147,16 +147,19 @@ const messages = {
 }
 
 export default function middleware(req, res, next) {
-  res.sendCreated = ({ message, data, ...args } = {}) => rp(res, codes.CREATED, messages.CREATED, message, data, args)
+  res.sendCreated = ({ message, data, ...args } = {}) =>
+    rp(res, codes.CREATED, messages.CREATED, message, data, args)
   res.sendSuccess = ({ message, data, ...args } = {}) => rp(res, codes.OK, messages.OK, message, data, args)
   res.sendBadRequest = ({ message, data, ...args } = {}) =>
     rp(res, codes.BAD_REQUEST, messages.BAD_REQUEST, message, data, args)
-  res.sendInternalServerError = ({ message, data, ...args } = {}) =>
-    rp(res, codes.INTERNAL_SERVER_ERROR, messages.INTERNAL_SERVER_ERROR, message, data, args)
   res.sendForbidden = ({ message, data, ...args } = {}) =>
     rp(res, codes.FORBIDDEN, messages.FORBIDDEN, message, data, args)
   res.sendUnauthorized = ({ message, data, ...args } = {}) =>
     rp(res, codes.UNAUTHORIZED, messages.UNAUTHORIZED, message, data, args)
+  res.sendUnprocessableEntity = ({ message, data, ...args } = {}) =>
+    rp(res, codes.UNPROCESSABLE_ENTITY, messages.UNPROCESSABLE_ENTITY, message, data, args)
+  res.sendInternalServerError = ({ message, data, ...args } = {}) =>
+    rp(res, codes.INTERNAL_SERVER_ERROR, messages.INTERNAL_SERVER_ERROR, message, data, args)
 
   next()
 }
