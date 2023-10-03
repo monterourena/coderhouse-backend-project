@@ -39,7 +39,6 @@ const loginRules = async (email, password, done) => {
     if (!user) return done(null, false, { message: 'User does not exist' })
 
     const isValidPassword = await validatePassword(password, user.password)
-
     if (!isValidPassword) return done(null, false, { message: 'Invalid password' })
 
     user = {
@@ -49,7 +48,6 @@ const loginRules = async (email, password, done) => {
       role: user.role,
       cart: user.cart
     }
-
     done(null, user)
   } catch (error) {
     done(error)

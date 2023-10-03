@@ -14,6 +14,16 @@ const isValidToken = (token) => {
     return false
   }
 }
+
+export const decodeToken = (token) => {
+  try {
+    const data = jwt.verify(token, process.env.JWT_SECRET)
+    return data
+  } catch (error) {
+    return null
+  }
+}
+
 export const jwtCookieExtractor = (req) => {
   if (!req || !req.cookies) return null
   const token = req.cookies[process.env.JWT_COOKIE_NAME]

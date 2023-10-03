@@ -8,4 +8,7 @@ export class UsersServices{
     createUser = (userData) => {
         return this.manager.createUser(userData)
     }
+    updateUserBy= (filters, updates) => {
+        return this.manager.updateUserBy(filters, updates)
+    }
 }

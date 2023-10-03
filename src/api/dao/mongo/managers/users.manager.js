@@ -5,6 +5,10 @@ class UsersManager {
   createUser = (userData) => {
     return userModel.create(userData)
   }
+
+  updateUserBy = (filters, updates) => {
+    return userModel.updateOne(filters, { $set: updates })
+  }
 }
 
 export { UsersManager }

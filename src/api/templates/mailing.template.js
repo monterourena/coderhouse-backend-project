@@ -48,23 +48,28 @@ export const TEMPLATES = {
   },
   resetPassword: (options) => {
     return {
-      from: 'David from Vivo <davidmonterourena@gmail.com>',
+      from: `Coderhouse Ecommerce <${process.env.APP_EMAIL}>`,
       to: [options.recipient],
-      subject: 'Password Reset!',
+      subject: 'Have you requested to reset your password? 🤔',
       html: `
             <div>
-                <h1>Hi! Welcome to Vivo Platform</h1>
-                <p>To restore your password please click <a href="http://localhost:8080/restorePassword?token=${options.token}">here</a></p>
-                <h3>Your token is ${options.token}</h3>
-                <img src="cid:vivo_logo" width="100"/>
-            </div>`,
-      attachments: [
-        {
-          filename: 'Brand.png',
-          path: './src/docs/logo.png',
-          cid: 'vivo_logo'
-        }
-      ]
+                <h1>Your restoration link has been generated</h1>
+                <p>To restore your password please click <a href="http://${process.env.HOST}/restorePassword?token=${options.token}">here</a></p>
+            </div>`
+    }
+  },
+  passwordChanged: (options) => {
+    return {
+      from: `Coderhouse Ecommerce <${process.env.APP_EMAIL}>`,
+      to: [options.recipient],
+      subject: 'Your password has been changed!',
+      html: `
+            <div>
+                <h1>Your password has been reset by using a reset link.</h1>
+                <p>If it wasn't you, please change your password immediately by clicking on <a href="http://${process.env.HOST}/resetPasswordRequest">this link</a></p>
+            </div>`
     }
   }
+
+  
 }
