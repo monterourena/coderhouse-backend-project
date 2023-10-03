@@ -54,7 +54,7 @@ export const TEMPLATES = {
       html: `
             <div>
                 <h1>Your restoration link has been generated</h1>
-                <p>To restore your password please click <a href="http://${process.env.HOST}/restorePassword?token=${options.token}">here</a></p>
+                <p>To restore your password please click <a href="${process.env.HOST}/restorePassword?token=${options.token}">here</a></p>
             </div>`
     }
   },
@@ -66,7 +66,7 @@ export const TEMPLATES = {
       html: `
             <div>
                 <h1>Your password has been reset by using a reset link.</h1>
-                <p>If it wasn't you, please change your password immediately by clicking on <a href="http://${process.env.HOST}/resetPasswordRequest">this link</a></p>
+                <p>If it wasn't you, please change your password immediately by clicking on <a href="${process.env.HOST}/resetPasswordRequest">this link</a></p>
             </div>`
     }
   }
