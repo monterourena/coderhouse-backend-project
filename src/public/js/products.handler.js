@@ -12,7 +12,7 @@ const settings = {
 
 const addToCart = async (cid, pid) => {
   const fetchResponse = await fetch(
-    `http://localhost:8080/api/carts/${cid}/products/${pid}`,
+    `${process.env.HOST}/api/carts/${cid}/products/${pid}`,
     settings
   );
   const data = await fetchResponse.json();
