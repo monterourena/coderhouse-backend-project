@@ -24,6 +24,8 @@ export default class CoreRouter {
   viewsController = Controllers.views
   cartsController = Controllers.carts
   productsController = Controllers.products
+  usersController = Controllers.users
+
 
   // ROUTES
   get(path, ...callbacks) {

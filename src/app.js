@@ -13,6 +13,7 @@ import ProductsRouter from "./api/routes/products.routes.js"
 import CartsRouter from "./api/routes/carts.routes.js"
 import ViewsRouter from "./api/routes/views.routes.js"
 import SessionRouter from "./api/routes/session.routes.js";
+import UsersRouter from "./api/routes/users.routes.js";
 
 // PASSPORT
 import { initializePassport } from "./api/auth/passport.auth.js";
@@ -47,10 +48,13 @@ const productsRouter = new ProductsRouter().router
 const cartsRouter = new CartsRouter().router
 const viewsRouter = new ViewsRouter().router
 const sessionRouter = new SessionRouter().router
+const usersRouter = new UsersRouter().router
 
 
 app.use("/", viewsRouter)
 app.use("/api/products", productsRouter);
 app.use("/api/carts", cartsRouter);
 app.use("/api/session", sessionRouter);
+app.use("/api/users", usersRouter);
+
 
