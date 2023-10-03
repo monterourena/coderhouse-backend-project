@@ -6,6 +6,9 @@ import { Services } from '../services/services.js'
 const usersService = Services.users
 const ms = Services.mailing
 export class SessionController {
+  healthCheck = async (req, res) => {
+    res.sendSuccess()
+  }
   registerUser = async (req, res) => {
     res.sendSuccess()
   }
