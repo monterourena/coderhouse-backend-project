@@ -10,7 +10,10 @@ const app = express()
 const PORT = process.env.PORT || process.env.LOCAL_PORT
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use(express.static(`${__src}/public`))
+app.use(express.static(`${__src}/public/general`))
+app.use(express.static(`${__src}/public/${process.env.NODE_ENV.toLowerCase() }`))
+
+
 
 // HANDLEBARS
 
