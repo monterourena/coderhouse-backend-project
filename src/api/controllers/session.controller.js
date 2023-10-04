@@ -10,6 +10,7 @@ export class SessionController {
     res.sendSuccess()
   }
   registerUser = async (req, res) => {
+    await usersService.updateLastConnection(req.user.id)
     res.sendSuccess()
   }
 
@@ -20,8 +21,11 @@ export class SessionController {
       name: req.user.name,
       role: req.user.role,
       email: req.user.email,
-      cart: req.user.cart
+      cart: req.user.cart,
+      id: req.user.id
     } // req.user viene dado por passport
+
+    await usersService.updateLastConnection(req.user.id)
 
     const accessToken = generateToken(user)
     const cookieExpirationTime = process.env.JWT_COOKIE_EXP_TIME_MS
@@ -39,8 +43,12 @@ export class SessionController {
       name: req.user.name,
       role: req.user.role,
       email: req.user.email,
-      cart: req.user.cart
+      cart: req.user.cart,
+      id: req.user.id
     }
+
+    console.log(req.user.id)
+    await usersService.updateLastConnection(req.user.id)
 
     const accessToken = generateToken(user)
     const cookieExpirationTime = process.env.JWT_COOKIE_EXP_TIME_MS
@@ -54,6 +62,8 @@ export class SessionController {
   }
 
   endSession = async (req, res) => {
+    console.log(req.user)
+    await usersService.updateLastConnection(req.user.id)
     const cookieName = process.env.JWT_COOKIE_NAME
     res.clearCookie(cookieName).redirect('/login')
   }

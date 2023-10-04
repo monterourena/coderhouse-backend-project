@@ -47,6 +47,7 @@ export const TEMPLATES = {
     }
   },
   resetPassword: (options) => {
+    console.log(`${process.env.HOST}`)
     return {
       from: `Coderhouse Ecommerce <${process.env.APP_EMAIL}>`,
       to: [options.recipient],

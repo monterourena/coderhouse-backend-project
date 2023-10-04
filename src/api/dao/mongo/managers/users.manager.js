@@ -9,6 +9,10 @@ class UsersManager {
   updateUserBy = (filters, updates) => {
     return userModel.updateOne(filters, { $set: updates })
   }
+
+  updateLastConnection= (uid) =>{
+    return userModel.findByIdAndUpdate(uid, { lastConnection: new Date() })
+  }
 }
 
 export { UsersManager }

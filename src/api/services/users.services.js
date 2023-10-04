@@ -11,4 +11,8 @@ export class UsersServices{
     updateUserBy= (filters, updates) => {
         return this.manager.updateUserBy(filters, updates)
     }
+
+    updateLastConnection = (uid)=>{
+        return this.manager.updateLastConnection(uid)
+    }
 }

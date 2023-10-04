@@ -27,8 +27,9 @@ const registerRules = async (req, email, password, done) => {
       cart: cart
     }
     const result = await usersService.createUser(user)
+    const newUser = DTOs.user(result).passportNewUser
 
-    done(null, result)
+    done(null, newUser)
   } catch (error) {
     done(error)
   }
@@ -42,14 +43,9 @@ const loginRules = async (email, password, done) => {
     const isValidPassword = await validatePassword(password, user.password)
     if (!isValidPassword) return done(null, false, { message: 'Invalid password' })
 
-    user = {
-      id: user._id,
-      name: `${user.first_name} ${user.last_name}`,
-      email: user.email,
-      role: user.role,
-      cart: user.cart
-    }
-    done(null, user)
+    const parsedUser = DTOs.user(user).passportNewUser
+
+    done(null, parsedUser)
   } catch (error) {
     done(error)
   }
@@ -79,20 +75,14 @@ const githubRules = async (accessToken, refreshToken, profile, done) => {
       })
 
     
-      const githubUser = DTOs.user(response).gihubUser
+      const githubUser = DTOs.user(response).passportNewUser
 
       return done(null, githubUser)
     }
 
-    user = {
-      id: user._id,
-      name: `${user.first_name} ${user.last_name}`,
-      email: user.email,
-      role: user.role,
-      cart: user.cart
-    }
-
-    done(null, user)
+    const parsedUser = DTOs.user(user).passportNewUser
+    
+    done(null, parsedUser)
   } catch (error) {
     done(error)
   }

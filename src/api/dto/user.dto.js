@@ -22,10 +22,10 @@ export default class UserDTO {
     }
   }
 
-  get gihubUser() {
+  get passportNewUser() {
     return {
       id: this.user._id,
-      name: `${this.user.first_name}`,
+      name: `${this.user.first_name} ${this.user.last_name}`,
       email: this.user.email,
       role: this.user.role,
       cart: this.user.cart
