@@ -52,10 +52,7 @@ export class ViewsController {
     return res.render('products', { user: currentUser, products: docs, paginationParams })
   }
   displayCart = async (req, res) => {
-    console.log(req.user.cart)
     const productsInCart = await cartsService.getCartProducts(req.user.cart)
-    console.log(productsInCart)
-
     res.render('cart', { products: productsInCart?.products, cid: req.user.cart })
   }
   displayLogin = async (req, res) => {
