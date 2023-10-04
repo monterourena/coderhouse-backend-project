@@ -9,6 +9,9 @@ class UsersManager {
   updateUserBy = (filters, updates) => {
     return userModel.updateOne(filters, { $set: updates })
   }
+  uploadDocuments = (uid, documents) => {
+    return userModel.findByIdAndUpdate(uid,{ $set: { documents } }, { new: true } )
+}
 
   updateLastConnection= (uid) =>{
     return userModel.findByIdAndUpdate(uid, { lastConnection: new Date() })

@@ -2,20 +2,25 @@ import { productsValidator } from '../validations/products.validation.js'
 import { Services } from "../services/services.js";
 import { DTOs } from '../dto/dtos.js';
 import { decodeToken } from '../../utils/jwt.utils.js';
+import userUtils from '../../utils/users.utils.js';
 
 const productsService = Services.products
 const cartsService = Services.carts
+const usersService = Services.users
 
 export class ViewsController {
   currentUser = async (req, res) => {
-    const user = req.user    
-    const currentUser = DTOs.user(user).data
+       
+    const currentUser = DTOs.user(req.user).data
 
     if(currentUser.role === "admin"){
       return res.render('current-admin', { user: currentUser })
     }
 
-    res.render('currentUser', { user: currentUser })
+    const user = await usersService.getUserBy({_id: req.user.id })
+    const hasDocuments = userUtils(user).hasValidDocuments
+
+    res.render('currentUser', { user: currentUser, hasDocuments })
   }
 
   displayProducts = async (req, res) => {

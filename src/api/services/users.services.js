@@ -12,6 +12,10 @@ export class UsersServices{
         return this.manager.updateUserBy(filters, updates)
     }
 
+    uploadDocuments = (uid, documents) => {
+        return this.manager.uploadDocuments(uid, documents)
+    }
+
     updateLastConnection = (uid)=>{
         return this.manager.updateLastConnection(uid)
     }

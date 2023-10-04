@@ -1,7 +1,7 @@
 import { __src } from '../../utils/directories.utils.js'
 import * as fs from 'fs'
 import multer from 'multer'
-import path from 'path'
+import path, {extname} from 'path'
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -11,7 +11,11 @@ const storage = multer.diskStorage({
     cb(null, uploadPath)
   },
   filename: (req, file, cb) => {
-    cb(null, file.originalname)
+    const fileExtension = extname(file.originalname)
+    const date = Date.now()
+    const prefix = file.fieldname
+    const standardFileName = `${prefix}-${date}${fileExtension}`
+    cb(null, standardFileName)
   }
 })
 

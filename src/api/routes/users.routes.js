@@ -6,7 +6,7 @@ const multer = Middlewares.multerAny
 export default class UsersRouter extends Router{
     routes(){
         this.get("/", this.usersController.getUsersBy)
-        this.post("/:uid/documents", multer ,this.usersController.uploadDocument)
+        this.post("/:uid/documents", multer ,this.usersController.uploadDocuments)
     }
 }
 

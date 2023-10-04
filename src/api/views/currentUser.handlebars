@@ -2,12 +2,39 @@
   <h1>Hola, {{user.name}}</h1>
   <p>Correo: {{user.email}}</p>
   <p>Role: {{user.role}}</p>
-  <p>Car: {{user.cart}}</p>
+  <p>Cart: {{user.cart}}</p>
   <div>
     <button id='cartButton'>Review cart</button>
     <button id='productsButton'>Check products</button>
     <button id='logoutButton'>Log out</button>
-    </div>
+  </div>
 </div>
+
+<h2>Documents</h2>
+{{#if hasDocuments}}
+  <p>All the required documents has been uploaded</p>
+{{else}}
+  <p>Please upload the required files</p>
+  <form enctype='multipart/form-data' method='post' id='filesForm'>
+    <div style='display: flex; flex-direction: column; max-width: 300px; gap: 30px'>
+      <div>
+        <label>Identification</label>
+        <input type='file' class='form-control-file' name='identifications' accept=".pdf" required/>
+      </div>
+
+      <div>
+        <label>Proof of Address</label>
+        <input type='file' class='form-control-file' name='proof-of-addresses' accept=".pdf" required/>
+      </div>
+
+      <div>
+        <label>Bank Statement</label>
+        <input type='file' class='form-control-file' name='bank-statements' accept=".pdf" required/>
+      </div>
+
+      <input type='submit' value='Upload files' class='btn btn-default' />
+    </div>
+  </form>
+{{/if}}
 
 <script src='./js/profileView.utils.js'></script>
