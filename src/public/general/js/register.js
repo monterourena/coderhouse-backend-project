@@ -8,9 +8,6 @@ submit.addEventListener("click", async (event) =>{
 
     data.forEach((value,key)=>(dataObject[key]=value))  
     
-    
-    console.log(dataObject)
-
     const response = await fetch("/api/session/register",{
         method: "POST",
         body:JSON.stringify(dataObject),
@@ -18,8 +15,6 @@ submit.addEventListener("click", async (event) =>{
             "Content-Type":"application/json"
         }
     })
-
-    console.log(response)
     
     response.ok
     ? window.location.replace("/login")

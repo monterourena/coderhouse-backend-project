@@ -16,7 +16,7 @@ submit.addEventListener("click", async (event) => {
     },
   });
 
-  console.log(response)
+ 
 
   response.ok
     ? window.location.replace("/products")

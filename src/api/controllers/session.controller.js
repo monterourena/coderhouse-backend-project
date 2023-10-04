@@ -47,7 +47,6 @@ export class SessionController {
       id: req.user.id
     }
 
-    console.log(req.user.id)
     await usersService.updateLastConnection(req.user.id)
 
     const accessToken = generateToken(user)
@@ -62,7 +61,6 @@ export class SessionController {
   }
 
   endSession = async (req, res) => {
-    console.log(req.user)
     await usersService.updateLastConnection(req.user.id)
     const cookieName = process.env.JWT_COOKIE_NAME
     res.clearCookie(cookieName).redirect('/login')
