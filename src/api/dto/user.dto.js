@@ -21,4 +21,14 @@ export default class UserDTO {
       email: this.user.email
     }
   }
+
+  get gihubUser() {
+    return {
+      id: this.user._id,
+      name: `${this.user.first_name}`,
+      email: this.user.email,
+      role: this.user.role,
+      cart: this.user.cart
+    }
+  }
 }

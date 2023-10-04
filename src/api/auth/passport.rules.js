@@ -1,4 +1,5 @@
 import { createHash, validatePassword } from '../../utils/crypto.utils.js'
+import { DTOs } from '../dto/dtos.js'
 import { Services } from '../services/services.js'
 
 const usersService = Services.users
@@ -57,9 +58,9 @@ const loginRules = async (email, password, done) => {
 const githubRules = async (accessToken, refreshToken, profile, done) => {
   try {
     const email = profile?.emails[0].value
-    const { name } = profile._json
-
+    const { name } = profile._json || ''
     let user = await usersService.getUserBy({ email })
+
 
     if (!email) return done(null, false, { message: 'Unable to get an email linked to this account' })
 
@@ -77,7 +78,10 @@ const githubRules = async (accessToken, refreshToken, profile, done) => {
         cart: cart._id
       })
 
-      return done(null, response)
+    
+      const githubUser = DTOs.user(response).gihubUser
+
+      return done(null, githubUser)
     }
 
     user = {
