@@ -14,13 +14,14 @@ export class UsersController {
         return DTOs.file(file).userDocument
       })
       const response = await usersService.uploadDocuments(uid, documents)
-      if(!response) return res.sendBadRequest({message: 'Invalid User ID'})
+      if (!response) return res.sendBadRequest({ message: 'Invalid User ID' })
 
-      res.sendSuccess({message: 'Documents uploaded'})
+      res.sendSuccess({ message: 'Documents uploaded' })
     } catch (error) {
-      if(error?.name === "CastError") return res.sendBadRequest({message: 'Invalid User ID'})
+      if (error?.name === 'CastError' || error?.message === 'UserNotFound'){
+        return res.sendBadRequest({ message: 'Invalid User ID' })}
 
-      return res.sendInternalServerError({message:error})
+      return res.sendInternalServerError({ message: error })
     }
   }
 }
