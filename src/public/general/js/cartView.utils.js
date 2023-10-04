@@ -23,3 +23,19 @@ const currentButton = document.querySelector('#currentButton')
 currentButton.addEventListener('click', async (event) => {
   window.location.replace('/current')
 })
+
+const purchase = async (cid) => {
+  console.warn(HOST)
+  const fetchResponse = await fetch(
+    `${HOST}/api/carts/${cid}/purchase`,
+    {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      }
+    }
+  );
+  const data = await fetchResponse.json();
+  return data;
+};

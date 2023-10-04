@@ -3,6 +3,7 @@
   <button id='currentButton'>Profile</button>
   <button id='productsButton'>Check products</button>
   <button id='logoutButton'>Log out</button>
+  <button onclick="purchase('{{cid}}')">Process purchase</button>
 </div>
 <div>
   {{#each products}}
@@ -17,4 +18,5 @@
   {{/each}}
 </div>
 
+<script src='/config.js'></script>
 <script src='./js/cartView.utils.js'></script>

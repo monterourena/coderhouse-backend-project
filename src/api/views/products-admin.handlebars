@@ -2,7 +2,6 @@
   <h1>Hola, {{user.name}}</h1>
   <div>
     <button id='currentButton'>Profile</button>
-    <button id='allUsersButton'>See all users</button>
     <button id='logoutButton'>Log out</button>
   </div>
 </div>
@@ -18,8 +17,8 @@
       <p> Price: {{this.price}}</p>
       <p> Status: {{this.status}}</p>
       <p> Category: {{this.category}}</p>
-      <button onclick="">Edit</button>
-      <button onclick="">Delete</button>
+      <button onclick=''>Edit</button>
+      <button onclick=''>Delete</button>
     </div>
   {{/each}}
 
@@ -42,3 +41,7 @@
 <script src='/config.js'></script>
 <script src='/js/products.handler.js'></script>
 <script src='./js/productsView.utils.js'></script>
+<script>
+  const allUsersButton = document.querySelector('#allUsersButton') allUsersButton.addEventListener('click',
+  async (event) => { window.location.replace('/users') })
+</script>
