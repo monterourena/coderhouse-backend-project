@@ -6,6 +6,8 @@ export default class FileDTO {
   }
 
   #setFileName = (fieldname) => {
+    // This function converts the field name to a more suitable file name if it has been defined
+
     const VN = USERS.DOCUMENTS.VALID_NAMES
     const FN = USERS.DOCUMENTS.FIELD_NAMES
     const nameMapper = {
@@ -18,7 +20,7 @@ export default class FileDTO {
 
   get userDocument() {
     return {
-      name: this.#setFileName(this.file.fieldname),
+      name: this.#setFileName(this.file.fieldname) || this.file.fieldname,
       reference: this.file.path
     }
   }
