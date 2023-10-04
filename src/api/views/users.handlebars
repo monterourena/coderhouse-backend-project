@@ -1,0 +1,18 @@
+<h1>USERS</h1>
+<div>
+  <button id='currentButton'>Profile</button>
+  <button id='logoutButton'>Log out</button>
+</div>
+{{#each users}}
+  <div style='margin: 16px; padding:8px; background-color:#f2e6e8'>
+    <h3>{{this.name}}</h3>
+    <h4>{{this.email}}</h4>
+    <p> Current Role: {{this.role}}</p>
+    <h4>Set role:</h4>
+    <button onclick=''>Admin</button>
+    <button onclick=''>Premium</button>
+    <button onclick=''>User</button>
+  </div>
+{{/each}}
+
+<script src='./js/productsView.utils.js'></script>

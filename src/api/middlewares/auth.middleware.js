@@ -17,12 +17,10 @@ const routingPolicy = (policy) => (req, res, next) => {
 };
 
 const requiredRole = (validRoles) => (req, res, next) => {
-  // validRoles: Array of strings
-
   if (validRoles.includes(req.user.role)) {
     next();
   } else {
-    res.sendResponse.forbidden({ message: "Invalid Role" });
+    res.sendForbidden({ message: "Invalid Role" });
   }
 };
 

@@ -22,6 +22,14 @@ export class ViewsController {
 
     res.render('currentUser', { user: currentUser, hasDocuments, uid: req.user.id })
   }
+  displayUsers=async (req, res) => {
+
+    let users = await usersService.getAllUsers('email first_name role')
+
+    users = users.map((user)=> DTOs.user(user).nameEmailRole)
+
+    res.render('users', {users})
+  }
 
   displayProducts = async (req, res) => {
     const queries = req.query

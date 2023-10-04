@@ -17,6 +17,11 @@ currentButton.addEventListener('click', async (event) => {
   window.location.replace('/current')
 })
 
+const allUsersButton = document.querySelector('#allUsersButton')
+allUsersButton.addEventListener('click', async (event) => {
+  window.location.replace('/users')
+})
+
 
 const cartButton = document.querySelector('#cartButton')
 cartButton.addEventListener('click', async (event) => {

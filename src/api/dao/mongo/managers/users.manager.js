@@ -2,7 +2,7 @@ import { userModel } from '../models/user.model.js'
 class UsersManager {
   getUserBy = (param) => userModel.findOne(param)
 
-  getAllUsers = (projection) => userModel.find({}, projection)
+  getAllUsers = (projection) => userModel.find({}, projection).lean()
 
   deleteInactiveUsers = async (inactivityInMinutes) => {
     const triggerDate = new Date(Date.now() - 30 * inactivityInMinutes * 1000)    
