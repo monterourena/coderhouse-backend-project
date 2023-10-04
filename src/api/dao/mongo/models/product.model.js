@@ -3,24 +3,12 @@ import aggregatePaginate from 'mongoose-aggregate-paginate-v2'
 
 const collection = 'products'
 
-const ownerValidator = {
-  validator: function (value) {
-    if (value === 'ADMIN' || mongoose.Types.ObjectId.isValid(value)) return true
-    return false
-  },
-  message: 'Owner must be a Mongo ObjectID or "ADMIN"'
-}
-
-
 const schema = new mongoose.Schema(
   {
     title: String,
     description: String,
     code: String,
-    owner: {
-      type: mongoose.Schema.Types.Mixed,
-      validate: ownerValidator
-    },
+    owner: mongoose.Schema.Types.Mixed,
     price: Number,
     status: Boolean,
     stock: Number,

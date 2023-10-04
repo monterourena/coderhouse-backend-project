@@ -1,3 +1,4 @@
+import { AUTH } from "../../constants/constants.js"
 import UUID from "../../utils/uuid.utils.js"
 
 export default class NewProductDTO {
@@ -10,7 +11,7 @@ export default class NewProductDTO {
       this.stock =product.stock
       this.category = product.category
       this.thumbnails = product.thumbnails
-      this.owner = product.owner || 'ADMIN'
+      this.owner = product.owner || AUTH.ROLES.ADMIN
     }
 
     get data() {

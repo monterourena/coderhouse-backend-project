@@ -33,6 +33,9 @@ export class UsersController {
       const { uid } = req.params
       const user = await usersService.getUserBy({ _id: uid })
       if (!user) return res.sendBadRequest({ message: 'Invalid User ID' })
+      if(user.role === AUTH.ROLES.ADMIN){
+        return res.sendForbidden({message: 'Administrators cannot change roles'})
+      }
       if (user.role === AUTH.ROLES.PREMIUM) {
         await usersService.updateUserRole(uid, AUTH.ROLES.USER)
         return res.sendSuccess({ message: 'Role Updated' })
