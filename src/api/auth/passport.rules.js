@@ -1,3 +1,4 @@
+import { AUTH } from '../../constants/constants.js'
 import { createHash, validatePassword } from '../../utils/crypto.utils.js'
 import { DTOs } from '../dto/dtos.js'
 import { Services } from '../services/services.js'
@@ -5,12 +6,14 @@ import { Services } from '../services/services.js'
 const usersService = Services.users
 const cartsService = Services.carts
 
-const PROVIDERS = { LOCAL: 'local', GITHUB: 'github' }
-const ROLES = { USER: 'user', ADMIN: 'admin' }
+const ROLES = AUTH.ROLES
+const PROVIDERS = AUTH.PROVIDERS
 
 const registerRules = async (req, email, password, done) => {
   try {
-    const { first_name, last_name, role } = req.body
+    const { first_name, last_name } = req.body
+
+
     const exists = await usersService.getUserBy({ email })
     if (exists) return done(null, false, { message: 'User already exists' })
 
@@ -20,7 +23,7 @@ const registerRules = async (req, email, password, done) => {
     const user = {
       first_name,
       last_name,
-      role,
+      role: ROLES.USER,
       email,
       password: hashedPassword,
       provider: PROVIDERS.LOCAL,

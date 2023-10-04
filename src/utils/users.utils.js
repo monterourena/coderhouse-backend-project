@@ -1,3 +1,4 @@
+import { USERS } from "../constants/constants.js";
 
 class UsersUtils {
     constructor(user){
@@ -5,7 +6,8 @@ class UsersUtils {
     }
 
     get hasValidDocuments () {
-        const requiredDocuments = new Set(["Identification", "Proof of Address", "Bank Statement"]);
+        const VN = USERS.DOCUMENTS.VALID_NAMES
+        const requiredDocuments = new Set([VN.ID, VN.PROOF_ADDRESS, VN.BANK_STATEMENT]);
         const documents = this.user.documents
         const documentNames = new Set(documents.map(document => document.name))
         return [...requiredDocuments].every(requiredDocument => documentNames.has(requiredDocument));

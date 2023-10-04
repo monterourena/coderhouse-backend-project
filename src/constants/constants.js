@@ -11,3 +11,23 @@ export const STATUS_MESSAGES = {
   MONGO,
   EXPRESS
 }
+
+export const AUTH = {
+  ROLES: { USER: 'user', ADMIN: 'admin', PREMIUM: 'premium' },
+  PROVIDERS: { LOCAL: 'local', GITHUB: 'github' }
+}
+
+export const USERS = {
+  DOCUMENTS: {
+    VALID_NAMES: {
+      ID: 'Identification',
+      PROOF_ADDRESS: 'Proof of Address',
+      BANK_STATEMENT: 'Bank Statement'
+    },
+    FIELD_NAMES: {
+      ID: 'identifications',
+      PROOF_ADDRESS: 'proof-of-addresses',
+      BANK_STATEMENT: 'bank-statements'
+    }
+  }
+}
