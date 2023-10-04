@@ -70,6 +70,21 @@ export const TEMPLATES = {
                 <p>If it wasn't you, please change your password immediately by clicking on <a href="${process.env.HOST}/resetPasswordRequest">this link</a></p>
             </div>`
     }
+  },
+  deletedAccount: (options) => {
+    return {
+      from: `Coderhouse Ecommerce <${process.env.APP_EMAIL}>`,
+      to: [...options.recipients],
+      subject: 'Your account has been deleted. 😯',
+      html: `
+            <div>
+                <h1>Your account has been deleted due to inactivity</h1>
+                <p>We regret any inconvenience this may have caused.</p>
+                <p>Remember that you are always welcome to create a new account.</p>
+                <p>Best Regads,</p>
+                <p>Coderhouse Ecommerce Team</p>
+            </div>`
+    }
   }
 
   

@@ -9,7 +9,8 @@ export class MailingService {
       TICKET_PROCESSED: 'ticketProcessed',
       RESTORE_PASSWORD: 'resetPassword',
       TICKET_NO_STOCK: 'ticketNoStock',
-      PASSWORD_CHANGED: 'passwordChanged'
+      PASSWORD_CHANGED: 'passwordChanged',
+      DELETED_ACCOUNT: 'deletedAccount'
     }
   }
 
