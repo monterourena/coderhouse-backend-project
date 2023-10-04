@@ -20,7 +20,7 @@ export class ViewsController {
     const user = await usersService.getUserBy({_id: req.user.id })
     const hasDocuments = userUtils(user).hasValidDocuments
 
-    res.render('currentUser', { user: currentUser, hasDocuments })
+    res.render('currentUser', { user: currentUser, hasDocuments, uid: req.user.id })
   }
 
   displayProducts = async (req, res) => {

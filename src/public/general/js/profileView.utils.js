@@ -24,18 +24,12 @@ cartButton.addEventListener('click', async (event) => {
 })
 
 // FILES FORM
-
 const form = document.getElementById('filesForm')
-
 form.addEventListener('submit', async (event) => {
   event.preventDefault()
   const data = new FormData(form)
-  const response = await fetch('/api/users/783202h3fo09u09f2j/documents', {
+  await fetch(`/api/users/${UID}/documents`, {
     method: 'POST',
     body: data,
   })
-
-  console.log("response: ", response)
-
-  
 })

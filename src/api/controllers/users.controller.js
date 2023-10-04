@@ -1,21 +1,26 @@
-import { DTOs } from "../dto/dtos.js"
-import { Services } from "../services/services.js"
+import { DTOs } from '../dto/dtos.js'
+import { Services } from '../services/services.js'
 
 const usersService = Services.users
 export class UsersController {
   getUsersBy = async (req, res) => {
     res.sendSuccess()
   }
-  
+
   uploadDocuments = async (req, res) => {
-    const uid = req.user.id
-    const documents = req.files.map((file)=>{
-      return DTOs.file(file).userDocument
-    })
+    try {
+      const { uid } = req.params
+      const documents = req.files.map((file) => {
+        return DTOs.file(file).userDocument
+      })
+      const response = await usersService.uploadDocuments(uid, documents)
+      if(!response) return res.sendBadRequest({message: 'Invalid User ID'})
 
-    const response = await usersService.uploadDocuments(uid,documents)
+      res.sendSuccess({message: 'Documents uploaded'})
+    } catch (error) {
+      if(error?.name === "CastError") return res.sendBadRequest({message: 'Invalid User ID'})
 
-    console.log(response)
-    res.sendSuccess({data: {file: req.files, body:req.body, params: req.params}})
+      return res.sendInternalServerError({message:error})
+    }
   }
 }
