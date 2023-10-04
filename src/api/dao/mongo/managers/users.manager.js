@@ -11,20 +11,24 @@ class UsersManager {
   }
 
   uploadDocuments = async (uid, documents) => {
-    //If the document with the same name exists, it is overwritten. If it does not exist then it is appended to the document array. 
+    //If the document with the same name exists, it is overwritten. If it does not exist then it is appended to the document array.
     const user = await userModel.findById(uid)
     if (!user) throw new Error('UserNotFound')
 
-    documents.forEach(newDoc => {
-      const existingDocIndex = user.documents.findIndex(doc => doc.name === newDoc.name);
+    documents.forEach((newDoc) => {
+      const existingDocIndex = user.documents.findIndex((doc) => doc.name === newDoc.name)
       if (existingDocIndex !== -1) {
-        user.documents[existingDocIndex] = newDoc;
+        user.documents[existingDocIndex] = newDoc
       } else {
-        user.documents.push(newDoc);
+        user.documents.push(newDoc)
       }
     })
 
     return user.save()
+  }
+
+  updateUserRole = (uid, role) => {
+    return userModel.findByIdAndUpdate(uid, { role })
   }
 
   updateLastConnection = (uid) => {
