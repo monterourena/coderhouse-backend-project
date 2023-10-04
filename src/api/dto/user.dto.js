@@ -22,6 +22,14 @@ export default class UserDTO {
     }
   }
 
+  get nameEmailRole(){
+    return {
+      name: this.user.first_name,    
+      email: this.user.email,
+      role: this.user.role
+    }
+  }
+
   get passportNewUser() {
     return {
       id: this.user._id,

@@ -2,6 +2,17 @@ import { userModel } from '../models/user.model.js'
 class UsersManager {
   getUserBy = (param) => userModel.findOne(param)
 
+  getAllUsers = (projection) => userModel.find({}, projection)
+
+  deleteInactiveUsers = async (inactivityInMinutes) => {
+    const triggerDate = new Date(Date.now() - 30 * inactivityInMinutes * 1000)    
+    const inactiveUsers = await userModel.find({ lastConnection: { $lt: triggerDate } }, 'email')
+    const emails = inactiveUsers.map(user => user.email)
+    await userModel.deleteMany({ email: { $in: emails } })
+
+    return emails
+  }
+
   createUser = (userData) => {
     return userModel.create(userData)
   }

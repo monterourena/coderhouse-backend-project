@@ -5,8 +5,17 @@ import { AUTH } from '../../constants/constants.js'
 
 const usersService = Services.users
 export class UsersController {
-  getUsersBy = async (req, res) => {
-    res.sendSuccess()
+  getAllUsers = async (req, res) => {
+    let users = await usersService.getAllUsers('email first_name role')
+    users = users.map((user)=>{
+      return DTOs.user(user).nameEmailRole
+    })
+    res.sendSuccess({data: users})
+  }
+
+  deleteInactiveUsers = async (req, res) => {
+    const deletedUsersEmails = await usersService.deleteInactiveUsers(1)
+    res.sendSuccess({data: deletedUsersEmails})
   }
 
   uploadDocuments = async (req, res) => {

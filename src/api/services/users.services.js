@@ -2,6 +2,12 @@ export class UsersServices{
     constructor(manager){
         this.manager = manager
     }
+    getAllUsers = (projection) => {
+        return this.manager.getAllUsers(projection)
+    }
+    deleteInactiveUsers = (inactivityInMinutes) => {
+        return this.manager.deleteInactiveUsers(inactivityInMinutes)
+    }
     getUserBy = (param) => {
         return this.manager.getUserBy(param)
     }
