@@ -24,8 +24,22 @@ currentButton.addEventListener('click', async (event) => {
   window.location.replace('/current')
 })
 
+const toast = (message) => Toastify({
+  text: message,
+  duration: 3000,
+  destination: "https://github.com/apvarun/toastify-js",
+  newWindow: true,
+  close: true,
+  gravity: "bottom", // `top` or `bottom`
+  position: "right", // `left`, `center` or `right`
+  stopOnFocus: true, // Prevents dismissing of toast on hover
+  style: {
+    background: "linear-gradient(to right, #00b09b, #96c93d)",
+  },
+  onClick: function(){} // Callback after click
+}).showToast();
+
 const purchase = async (cid) => {
-  console.warn(HOST)
   const fetchResponse = await fetch(
     `${HOST}/api/carts/${cid}/purchase`,
     {
@@ -36,6 +50,15 @@ const purchase = async (cid) => {
       }
     }
   );
-  const data = await fetchResponse.json();
-  return data;
+
+  if(fetchResponse.status === 200){
+    toast("Your order has been placed 😊")
+    setTimeout(()=>{window.location.replace("/cart")}, 5000)
+  }
+  
+  else if (fetchResponse.status === 422){
+    toast("Not enough stock for your selected products 😣")
+    setTimeout(()=>{window.location.replace("/cart")}, 5000)
+  }
+ 
 };
