@@ -1,4 +1,4 @@
-# Ecommerce Product Manager 
+# Coderhouse - Ecommerce Product Manager 
 
 ![Banner](https://user-images.githubusercontent.com/117543842/229423894-364befe8-b822-4f7a-bb1b-90c70e1e3732.png)
 
