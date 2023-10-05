@@ -62,6 +62,11 @@ export class CartsController {
     try {
       const { cid } = req.params
       const cartData = await cartsService.getCartProducts(cid)
+
+      if (cartData?.products.length === 0) {
+        return res.sendBadRequest({ message: 'There are no products in your cart, your order cannot be processed.'})
+      }
+
       const cartOwner = await usersService.getUserBy({ cart: cid })
       const ticket = DTOs.ticket(cartData, cartOwner)
       await productsService.decreaseStockManyProducts(ticket.purchasedItemsMetadata)
@@ -69,7 +74,7 @@ export class CartsController {
       const response = await ticketsService.createTicket(ticket.details)
 
       if (ticket.purchasedItems.length === 0) {
-        await ms.sendEmail(ms.templates.TICKET_NO_STOCK, {recipient: cartOwner.email})
+        await ms.sendEmail(ms.templates.TICKET_NO_STOCK, { recipient: cartOwner.email })
         return res.sendUnprocessableEntity({
           message:
             'Your request could not be processed, there is not enough stock for any of your products in the cart.'

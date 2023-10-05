@@ -55,9 +55,19 @@ const purchase = async (cid) => {
     toast("Your order has been placed 😊")
     setTimeout(()=>{window.location.replace("/cart")}, 5000)
   }
+
+  else if (fetchResponse.status === 400){
+    toast("There are no products in your cart, your order cannot be processed 😣")
+    setTimeout(()=>{window.location.replace("/cart")}, 5000)
+  }
   
   else if (fetchResponse.status === 422){
     toast("Not enough stock for your selected products 😣")
+    setTimeout(()=>{window.location.replace("/cart")}, 5000)
+  }
+
+  else{
+    toast("An error has occurred, please try again later. 😣")
     setTimeout(()=>{window.location.replace("/cart")}, 5000)
   }
  
