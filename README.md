@@ -18,7 +18,7 @@ npm run dev
 ## Demo and Deploy
 You can access the deploy of this project by clicking on [this link](https://coderhouse-backend-project.onrender.com/). In order to test email notifications you are required to register with a real email address.
 
-### Admin Credentials
+### Admin Credentials (Development and Production)
 > email: admin@email.com
 > 
 > password: password1234
@@ -37,6 +37,19 @@ You can access the deploy of this project by clicking on [this link](https://cod
 | _/resetPasswordRequest_ | Password reset view. Only registered users will be able to request a password reset.                            | NOT_AUTH_USERS_ONLY | -                 |
 
 ## API Endpoints
+### Session
+| **Method** | **Endpoint** | **Description** | **Body Schema** | **Queries** | **Params** |
+|---|---|---|---|---|---|
+| **_GET_** | /api/products/ | Indicates if the server is running | - | - | - |
+
+### Users
+| **Method** | **Endpoint** | **Description** | **Body Schema** | **Queries** | **Params** |
+|---|---|---|---|---|---|
+| **_GET_** | /api/users/ | Gets all registered users | - | - | - |
+| **_DELETE_** | /api/users/ | Delete all users who have been inactive for a period of time defined in the controller | - | - | - |
+| **_POST_** | /api/users/:uid/documents | It is used to upload the user's documents. The fieldName/Key considered to indicate if a user has the required files or not are: "identifications", "proof-of-addresses" and "bank-statements". Files can be uploaded individually or simultaneously, but always with an individual Fieldname/Key for each file. | form-data | - | uid: ID of the user the documents will be assigned to |
+| **_POST_** | /api/users/premium/:uid | Toggles the role of a user between premium and user. | - | - | uid: ID of the user whose role will be changed |
+
 ### Cart
 | **Method**   | **Endpoint**                    | **Description**                              | **Body Schema**                                                | **Queries** | **Params**                    |
 |--------------|---------------------------------|----------------------------------------------|----------------------------------------------------------------|-------------|-------------------------------|
@@ -49,17 +62,11 @@ You can access the deploy of this project by clicking on [this link](https://cod
 | **_DELETE_** | _/api/carts/:cid_               | Remove all content from a shopping cart      | -                                                              | -           | cid: Cart ID                  |
 | **_DELETE_** | _/api/carts/:cid/products/:pid_ | Remove an item from a shopping cart          | -                                                              | -           | cid: Cart ID / pid:Product DI |
 
-### Users
-> Documentation in progress
-
+### Products
 | **Method** | **Endpoint** | **Description** | **Body Schema** | **Queries** | **Params** |
 |---|---|---|---|---|---|
-| **_GET_** | /api/users/ | Gets all registered users |  |  |  |
-| **_DELETE_** | /api/users/ | Delete all users who have been inactive for a period of time defined in the controller |  |  |  |
-| **_POST_** | /api/users/:uid/documents | It is used to upload the user's documents. The fieldName/Key considered to indicate if a user has the required files or not are "identifications", "proof-of-addresses" and "bank-statements". Files can be uploaded individually or simultaneously, but always with an individual Fieldname/Key for each file. |  |  |  |
-| **_POST_** | /api/users/premium/:uid | Toggles the role of a user between premium and user. |  |  |  |
-
-### Products
-> Documentation in progress
-### Session
-> Documentation in progress
+| **_GET_** | /api/users/ | It gives the existing products as a pagination. The search can be filtered using query params | - | limit, page, price, stock: Number / sort: asc, desc / _id: Mongo ID / title, description, code, category: String/ status: Boolean | - |
+| **_GET_** | /api/products/:pid | Get a product based on your id | - | - | pid:Product DI |
+| **_POST_** | /api/products/ | Create a new product | {"title": String,"description": String, "code": String,"price": Number,"status": false,"stock": Number,"owner": Mongo User ID,"category": String, "thumbnails": [String]} | - | - |
+| **_PUT_** | /api/products/:pid/:uid | Update product information | Fields to update, following the product creation scheme | - | pid:Product ID / uid: ID of the user updating |
+| **_GET_** | /api/products/:pid/:uid | Delete a product based on its ID | - | - | pid:Product DI / uid: ID of the user deleting|
