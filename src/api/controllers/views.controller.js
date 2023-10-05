@@ -9,6 +9,12 @@ const cartsService = Services.carts
 const usersService = Services.users
 
 export class ViewsController {
+
+  home=async (req, res) => {
+    res.render('home')
+  }
+
+
   currentUser = async (req, res) => {
        
     const currentUser = DTOs.user(req.user).data

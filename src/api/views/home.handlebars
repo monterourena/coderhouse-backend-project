@@ -1,0 +1,12 @@
+<h1>Welcome to Coderhouse Ecommerse</h1>
+<button id="loginButton">Email and Github Login</button>
+<button id="registerButton">Create Account</button>
+
+
+<script>
+  const registerButton = document.querySelector('#registerButton') 
+  registerButton.addEventListener('click', async(event) => { window.location.replace('/register') }) 
+  
+  const loginButton = document.querySelector('#loginButton')
+  loginButton.addEventListener('click', async (event) => { window.location.replace('/login') })
+</script>
