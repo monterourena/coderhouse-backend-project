@@ -69,4 +69,4 @@ You can access the deploy of this project by clicking on [this link](https://cod
 | **_GET_** | /api/products/:pid | Get a product based on your id | - | - | pid:Product DI |
 | **_POST_** | /api/products/ | Create a new product | {"title": String,"description": String, "code": String,"price": Number,"status": false,"stock": Number,"owner": Mongo User ID,"category": String, "thumbnails": [String]} | - | - |
 | **_PUT_** | /api/products/:pid/:uid | Update product information | Fields to update, following the product creation scheme | - | pid:Product ID / uid: ID of the user updating |
-| **_GET_** | /api/products/:pid/:uid | Delete a product based on its ID | - | - | pid:Product DI / uid: ID of the user deleting|
+| **_DELETE_** | /api/products/:pid/:uid | Delete a product based on its ID | - | - | pid:Product DI / uid: ID of the user deleting|
