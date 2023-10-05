@@ -3,7 +3,7 @@ import { routingPolicy, requiredRole } from '../middlewares/auth.middleware.js'
 import { AUTH } from '../../constants/constants.js'
 export default class ViewsRouter extends Router {
   routes() {
-    this.get('/', this.viewsController.home)
+    this.get('/', routingPolicy('NOT_AUTH_USERS_ONLY'), this.viewsController.home)
     this.get('/current', routingPolicy('AUTH_USERS_ONLY'), this.viewsController.currentUser)
     this.get('/products', routingPolicy('AUTH_USERS_ONLY'), this.viewsController.displayProducts)
     this.get(
